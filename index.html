@@ -5,74 +5,567 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Menu</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            background-color: black;
+            background-color: #0a0e27;
             color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+            min-height: 100vh;
             transition: background-color 0.5s;
         }
-        button {
-            background-color: #555;
-            border: none;
-            color: white;
-            padding: 15px 32px;
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1, h2 {
             text-align: center;
-            text-decoration: none;
-            display: inline-block;
+            margin-bottom: 30px;
+            color: #64b5f6;
+            text-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+        }
+        
+        .menu-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: 2px solid #64b5f6;
+            color: white;
+            padding: 15px 20px;
             font-size: 16px;
-            margin: 4px 2px;
+            border-radius: 8px;
             cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            font-weight: bold;
         }
+        
         button:hover {
-            background-color: #666;
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            box-shadow: 0 0 15px rgba(100, 181, 246, 0.6);
+            transform: translateY(-2px);
         }
-        .submenu {
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .menu {
             display: none;
+        }
+        
+        .menu.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .submenu-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .content-area {
+            background-color: rgba(30, 60, 114, 0.3);
+            border: 2px solid #64b5f6;
+            border-radius: 8px;
+            padding: 20px;
             margin-top: 20px;
+            min-height: 300px;
+        }
+        
+        .content-page {
+            display: none;
+        }
+        
+        .content-page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .content-page h3 {
+            color: #64b5f6;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .content-page h4 {
+            color: #90caf9;
+            margin-top: 15px;
+        }
+        
+        .content-page p, .content-page ul, .content-page table {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .content-page ul {
+            margin-left: 20px;
+        }
+        
+        .content-page li {
+            margin-bottom: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        table th, table td {
+            border: 1px solid #64b5f6;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        table th {
+            background-color: rgba(100, 181, 246, 0.2);
+            color: #64b5f6;
+        }
+        
+        .return-btn {
+            background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
+            border-color: #ef5350;
+            margin-top: 20px;
+        }
+        
+        .return-btn:hover {
+            box-shadow: 0 0 15px rgba(239, 83, 80, 0.6);
         }
     </style>
 </head>
 <body>
-    <h1>主菜单</h1>
-    <button id="libBtn">知识点库</button>
-    <button id="questionBtn">题库</button>
-    <button id="errorBtn">个性化易错题库</button>
+    <div class="container">
+        <!-- 主菜单 -->
+        <div id="mainMenu" class="menu active">
+            <h1>🌟 天文知识库 🌟</h1>
+            <div class="menu-buttons">
+                <button onclick="showMenu('libMenu')">📚 知识点库</button>
+                <button onclick="showMenu('questionMenu')">❓ 题库</button>
+                <button onclick="showMenu('errorMenu')">⚠️ 个性化易错题库</button>
+            </div>
+        </div>
 
-    <div class="submenu" id="difficultyMenu">
-        <h2>选择难度</h2>
-        <button id="beginner">初学者</button>
-        <button id="intermediate">中等水平</button>
-        <button id="advanced">高水平</button>
-        <br><br>
-        <button id="returnBtn">返回主菜单</button>
+        <!-- 知识点库菜单 -->
+        <div id="libMenu" class="menu">
+            <h2>📚 知识点库</h2>
+            <div class="submenu-buttons">
+                <button onclick="showContent('brightStars')">全天五十亮星表</button>
+                <button onclick="showContent('zodiac')">黄道十二宫表</button>
+                <button onclick="showContent('conversion')">换算</button>
+                <button onclick="showContent('domesticSpacecraft')">国内航天器</button>
+                <button onclick="showContent('internationalSpacecraft')">国际航天器</button>
+                <button onclick="showContent('betaAlpha')">β星比α星亮的星座</button>
+            </div>
+            
+            <div class="content-area">
+                <!-- 全天五十亮星表 -->
+                <div id="brightStars" class="content-page active">
+                    <h3>全天五十亮星表</h3>
+                    <p>全天最亮的50颗恒星按视星等排列：</p>
+                    <table>
+                        <tr>
+                            <th>排名</th>
+                            <th>星名</th>
+                            <th>视星等</th>
+                            <th>所在星座</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>天狼星</td>
+                            <td>-1.46</td>
+                            <td>大犬座</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>老人星</td>
+                            <td>-0.72</td>
+                            <td>船底座</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>南门二</td>
+                            <td>-0.27</td>
+                            <td>半人马座</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>大角星</td>
+                            <td>-0.04</td>
+                            <td>牧夫座</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>织女星</td>
+                            <td>0.03</td>
+                            <td>琴座</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 15px; font-size: 12px; color: #90caf9;">注：表格仅显示前5颗，完整表格包含全天50颗最亮恒星</p>
+                </div>
+
+                <!-- 黄道十二宫表 -->
+                <div id="zodiac" class="content-page">
+                    <h3>黄道十二宫表</h3>
+                    <p>黄道十二宫是太阳在黄道上运行一年所经过的12个星座：</p>
+                    <table>
+                        <tr>
+                            <th>宫名</th>
+                            <th>对应星座</th>
+                            <th>太阳进入日期</th>
+                            <th>太阳离开日期</th>
+                        </tr>
+                        <tr>
+                            <td>白羊宫</td>
+                            <td>白羊座</td>
+                            <td>3月21日</td>
+                            <td>4月19日</td>
+                        </tr>
+                        <tr>
+                            <td>金牛宫</td>
+                            <td>金牛座</td>
+                            <td>4月20日</td>
+                            <td>5月20日</td>
+                        </tr>
+                        <tr>
+                            <td>双子宫</td>
+                            <td>双子座</td>
+                            <td>5月21日</td>
+                            <td>6月20日</td>
+                        </tr>
+                        <tr>
+                            <td>巨蟹宫</td>
+                            <td>巨蟹座</td>
+                            <td>6月21日</td>
+                            <td>7月22日</td>
+                        </tr>
+                        <tr>
+                            <td>狮子宫</td>
+                            <td>狮子座</td>
+                            <td>7月23日</td>
+                            <td>8月22日</td>
+                        </tr>
+                        <tr>
+                            <td>处女宫</td>
+                            <td>处女座</td>
+                            <td>8月23日</td>
+                            <td>9月22日</td>
+                        </tr>
+                        <tr>
+                            <td>天秤宫</td>
+                            <td>天秤座</td>
+                            <td>9月23日</td>
+                            <td>10月22日</td>
+                        </tr>
+                        <tr>
+                            <td>天蝎宫</td>
+                            <td>天蝎座</td>
+                            <td>10月23日</td>
+                            <td>11月21日</td>
+                        </tr>
+                        <tr>
+                            <td>射手宫</td>
+                            <td>射手座</td>
+                            <td>11月22日</td>
+                            <td>12月21日</td>
+                        </tr>
+                        <tr>
+                            <td>摩羯宫</td>
+                            <td>摩羯座</td>
+                            <td>12月22日</td>
+                            <td>1月19日</td>
+                        </tr>
+                        <tr>
+                            <td>水瓶宫</td>
+                            <td>水瓶座</td>
+                            <td>1月20日</td>
+                            <td>2月18日</td>
+                        </tr>
+                        <tr>
+                            <td>双鱼宫</td>
+                            <td>双鱼座</td>
+                            <td>2月19日</td>
+                            <td>3月20日</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 换算 -->
+                <div id="conversion" class="content-page">
+                    <h3>天文单位换算</h3>
+                    <h4>距离单位换算</h4>
+                    <ul>
+                        <li><strong>1 天文单位 (AU)</strong> = 1.496 × 10¹¹ 米</li>
+                        <li><strong>1 光年 (ly)</strong> = 9.461 × 10¹⁵ 米</li>
+                        <li><strong>1 秒差距 (pc)</strong> = 3.086 × 10¹⁶ 米 = 3.26 光年</li>
+                        <li><strong>1 AU</strong> ≈ 1.5 亿公里</li>
+                    </ul>
+                    
+                    <h4>角度单位换算</h4>
+                    <ul>
+                        <li><strong>1 度 (°)</strong> = 60 分 (′) = 3600 秒 (″)</li>
+                        <li><strong>1 弧分 (′)</strong> = 60 弧秒 (″)</li>
+                        <li><strong>1 弧度 (rad)</strong> = 57.3°</li>
+                    </ul>
+                    
+                    <h4>亮度单位换算</h4>
+                    <ul>
+                        <li><strong>视星等差 1</strong> = 亮度比 2.512 倍</li>
+                        <li><strong>视星等差 5</strong> = 亮度比 100 倍</li>
+                        <li><strong>绝对星等</strong> = 视星等 + 5 - 5lg(距离/pc)</li>
+                    </ul>
+                </div>
+
+                <!-- 国内航天器 -->
+                <div id="domesticSpacecraft" class="content-page">
+                    <h3>国内航天器</h3>
+                    <p>中国主要航天器及卫星项目：</p>
+                    <table>
+                        <tr>
+                            <th>名称</th>
+                            <th>类型</th>
+                            <th>发射时间</th>
+                            <th>用途</th>
+                        </tr>
+                        <tr>
+                            <td>神舟系列</td>
+                            <td>载人飞船</td>
+                            <td>1999年-至今</td>
+                            <td>载人航天</td>
+                        </tr>
+                        <tr>
+                            <td>天宫系列</td>
+                            <td>空间站</td>
+                            <td>2011年-至今</td>
+                            <td>空间科学实验</td>
+                        </tr>
+                        <tr>
+                            <td>天舟系列</td>
+                            <td>货运飞船</td>
+                            <td>2017年-至今</td>
+                            <td>空间站补给</td>
+                        </tr>
+                        <tr>
+                            <td>北斗导航卫星</td>
+                            <td>导航卫星</td>
+                            <td>2000年-至今</td>
+                            <td>导航定位</td>
+                        </tr>
+                        <tr>
+                            <td>嫦娥系列</td>
+                            <td>月球探测器</td>
+                            <td>2007年-至今</td>
+                            <td>月球探测</td>
+                        </tr>
+                        <tr>
+                            <td>祝融号</td>
+                            <td>火星探测器</td>
+                            <td>2021年</td>
+                            <td>火星探测</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 国际航天器 -->
+                <div id="internationalSpacecraft" class="content-page">
+                    <h3>国际航天器</h3>
+                    <p>主要国际航天器及卫星项目：</p>
+                    <table>
+                        <tr>
+                            <th>名称</th>
+                            <th>国家/组织</th>
+                            <th>类型</th>
+                            <th>用途</th>
+                        </tr>
+                        <tr>
+                            <td>国际空间站 (ISS)</td>
+                            <td>多国合作</td>
+                            <td>空间站</td>
+                            <td>科学研究</td>
+                        </tr>
+                        <tr>
+                            <td>哈勃太空望远镜</td>
+                            <td>美国/欧洲</td>
+                            <td>空间望远镜</td>
+                            <td>天文观测</td>
+                        </tr>
+                        <tr>
+                            <td>詹姆斯·韦伯太空望远镜</td>
+                            <td>美国/欧洲/加拿大</td>
+                            <td>空间望远镜</td>
+                            <td>深空观测</td>
+                        </tr>
+                        <tr>
+                            <td>GPS卫星</td>
+                            <td>美国</td>
+                            <td>导航卫星</td>
+                            <td>导航定位</td>
+                        </tr>
+                        <tr>
+                            <td>伽利略卫星系统</td>
+                            <td>欧洲</td>
+                            <td>导航卫星</td>
+                            <td>导航定位</td>
+                        </tr>
+                        <tr>
+                            <td>火星探测器 (Perseverance)</td>
+                            <td>美国</td>
+                            <td>火星探测器</td>
+                            <td>火星探测</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- β星比α星亮的星座 -->
+                <div id="betaAlpha" class="content-page">
+                    <h3>β星比α星亮的星座列表</h3>
+                    <p>在某些星座中，β星的亮度比α星更亮，这些星座包括：</p>
+                    <table>
+                        <tr>
+                            <th>星座</th>
+                            <th>α星</th>
+                            <th>α星视星等</th>
+                            <th>β星</th>
+                            <th>β星视星等</th>
+                        </tr>
+                        <tr>
+                            <td>金牛座</td>
+                            <td>毕宿五</td>
+                            <td>0.85</td>
+                            <td>毕宿二</td>
+                            <td>1.65</td>
+                        </tr>
+                        <tr>
+                            <td>巨蟹座</td>
+                            <td>北极星增四</td>
+                            <td>4.26</td>
+                            <td>鬼宿</td>
+                            <td>3.52</td>
+                        </tr>
+                        <tr>
+                            <td>狮子座</td>
+                            <td>轩辕十四</td>
+                            <td>1.35</td>
+                            <td>五帝座一</td>
+                            <td>1.44</td>
+                        </tr>
+                        <tr>
+                            <td>处女座</td>
+                            <td>角宿一</td>
+                            <td>0.98</td>
+                            <td>角宿二</td>
+                            <td>1.84</td>
+                        </tr>
+                        <tr>
+                            <td>天蝎座</td>
+                            <td>心宿二</td>
+                            <td>0.96</td>
+                            <td>心宿增十</td>
+                            <td>1.91</td>
+                        </tr>
+                        <tr>
+                            <td>射手座</td>
+                            <td>斗宿一</td>
+                            <td>2.59</td>
+                            <td>斗宿二</td>
+                            <td>1.83</td>
+                        </tr>
+                        <tr>
+                            <td>摩羯座</td>
+                            <td>垒壁阵一</td>
+                            <td>3.57</td>
+                            <td>垒壁阵二</td>
+                            <td>3.03</td>
+                        </tr>
+                        <tr>
+                            <td>双鱼座</td>
+                            <td>右更一</td>
+                            <td>3.82</td>
+                            <td>右更二</td>
+                            <td>2.04</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
+        </div>
+
+        <!-- 题库菜单 -->
+        <div id="questionMenu" class="menu">
+            <h2>❓ 题库</h2>
+            <div class="submenu-buttons">
+                <button onclick="selectDifficulty('beginner')">初学者</button>
+                <button onclick="selectDifficulty('intermediate')">中等水平</button>
+                <button onclick="selectDifficulty('advanced')">高水平</button>
+            </div>
+            <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
+        </div>
+
+        <!-- 个性化易错题库菜单 -->
+        <div id="errorMenu" class="menu">
+            <h2>⚠️ 个性化易错题库</h2>
+            <p style="text-align: center; margin-top: 30px; font-size: 18px;">功能开发中...</p>
+            <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
+        </div>
     </div>
 
     <script>
-        const questionBtn = document.getElementById('questionBtn');
-        const difficultyMenu = document.getElementById('difficultyMenu');
-        const returnBtn = document.getElementById('returnBtn');
+        function showMenu(menuId) {
+            // 隐藏所有菜单
+            const menus = document.querySelectorAll('.menu');
+            menus.forEach(menu => menu.classList.remove('active'));
+            
+            // 显示选中的菜单
+            document.getElementById(menuId).classList.add('active');
+            
+            // 如果是知识点库菜单，显示第一个内容
+            if (menuId === 'libMenu') {
+                showContent('brightStars');
+            }
+        }
 
-        questionBtn.onclick = () => {
-            difficultyMenu.style.display = 'block';
-        };
+        function showContent(contentId) {
+            // 隐藏所有内容页面
+            const pages = document.querySelectorAll('.content-page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // 显示选中的内容
+            document.getElementById(contentId).classList.add('active');
+        }
 
-        returnBtn.onclick = () => {
-            difficultyMenu.style.display = 'none';
-        };
-
-        document.getElementById('beginner').onclick = () => {
-            alert('您选择了：初学者');
-        };
-        document.getElementById('intermediate').onclick = () => {
-            alert('您选择了：中等水平');
-        };
-        document.getElementById('advanced').onclick = () => {
-            alert('您选择了：高水平');
-        };
+        function selectDifficulty(difficulty) {
+            const difficultyNames = {
+                'beginner': '初学者',
+                'intermediate': '中等水平',
+                'advanced': '高水平'
+            };
+            alert('您选择了：' + difficultyNames[difficulty]);
+        }
     </script>
 </body>
 </html>
