@@ -1,0 +1,1 @@
+{\n  "name": "zeabur",\n  "description": "Zeabur deployment configuration",\n  "version": "1.0.0",\n  "deployment": {\n    "environment": "production",\n    "region": "us-east-1"\n  }\n}
