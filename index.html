@@ -1,36 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-        .button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            margin: 4px 2px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <title>Question Bank</title>
 </head>
 <body>
-    <h1>欢迎来到我们的页面</h1>
-    <button class="button">知识点库</button>
-    <button class="button">题库</button>
-    <button class="button">个性化易错题库</button>
+    <h1>Question Bank</h1>
+    <div>
+        <button onclick="showDifficulty('初学者')">初学者</button>
+        <button onclick="showDifficulty('中等水平')">中等水平</button>
+        <button onclick="showDifficulty('高水平')">高水平</button>
+    </div>
+    <div id="difficultyMenu" style="display:none;">
+        <h2>Difficulty Level: <span id="selectedDifficulty"></span></h2>
+        <p>Questions will be displayed here based on the chosen difficulty.</p>
+    </div>
+    <script>
+        function showDifficulty(level) {
+            document.getElementById('selectedDifficulty').innerText = level;
+            document.getElementById('difficultyMenu').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
