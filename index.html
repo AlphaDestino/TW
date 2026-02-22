@@ -970,72 +970,46 @@
                         title: '全天五十亮星表',
                         description: '全天最亮的50颗恒星按视星等排列',
                         details: `
-                           <h4>全天五十亮星（按视星等）</h4>
-                            <p style="color:#90caf9; margin-bottom: 10px;">覆盖全天常见亮星，便于观测入门和星空定位。</p>
-                            <div class="star-table-container">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>排名</th>
-                                            <th>星名</th>
-                                            <th>视星等</th>
-                                            <th>所在星座</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>1</td><td>天狼星</td><td>-1.46</td><td>大犬座</td></tr>
-                                        <tr><td>2</td><td>老人星</td><td>-0.74</td><td>船底座</td></tr>
-                                        <tr><td>3</td><td>南门二</td><td>-0.27</td><td>半人马座</td></tr>
-                                        <tr><td>4</td><td>大角星</td><td>-0.05</td><td>牧夫座</td></tr>
-                                        <tr><td>5</td><td>织女星</td><td>0.03</td><td>天琴座</td></tr>
-                                        <tr><td>6</td><td>五车二</td><td>0.08</td><td>御夫座</td></tr>
-                                        <tr><td>7</td><td>参宿七</td><td>0.12</td><td>猎户座</td></tr>
-                                        <tr><td>8</td><td>南河三</td><td>0.38</td><td>小犬座</td></tr>
-                                        <tr><td>9</td><td>参宿四</td><td>0.45</td><td>猎户座</td></tr>
-                                        <tr><td>10</td><td>水委一</td><td>0.46</td><td>波江座</td></tr>
-                                        <tr><td>11</td><td>马腹一</td><td>0.61</td><td>半人马座</td></tr>
-                                        <tr><td>12</td><td>河鼓二</td><td>0.77</td><td>天鹰座</td></tr>
-                                        <tr><td>13</td><td>毕宿五</td><td>0.85</td><td>金牛座</td></tr>
-                                        <tr><td>14</td><td>角宿一</td><td>0.98</td><td>室女座</td></tr>
-                                        <tr><td>15</td><td>心宿二</td><td>1.06</td><td>天蝎座</td></tr>
-                                        <tr><td>16</td><td>北河三</td><td>1.14</td><td>双子座</td></tr>
-                                        <tr><td>17</td><td>北落师门</td><td>1.16</td><td>南鱼座</td></tr>
-                                        <tr><td>18</td><td>天津四</td><td>1.25</td><td>天鹅座</td></tr>
-                                        <tr><td>19</td><td>轩辕十四</td><td>1.35</td><td>狮子座</td></tr>
-                                        <tr><td>20</td><td>十字架二</td><td>1.25</td><td>南十字座</td></tr>
-                                        <tr><td>21</td><td>角宿一北</td><td>1.35</td><td>半人马座</td></tr>
-                                        <tr><td>22</td><td>北河二</td><td>1.58</td><td>双子座</td></tr>
-                                        <tr><td>23</td><td>参宿五</td><td>1.64</td><td>猎户座</td></tr>
-                                        <tr><td>24</td><td>毕宿八</td><td>1.65</td><td>猎户座</td></tr>
-                                        <tr><td>25</td><td>河鼓一</td><td>1.76</td><td>天鹰座</td></tr>
-                                        <tr><td>26</td><td>角宿二</td><td>1.79</td><td>室女座</td></tr>
-                                        <tr><td>27</td><td>井宿三</td><td>1.84</td><td>双子座</td></tr>
-                                        <tr><td>28</td><td>觜宿一</td><td>1.90</td><td>猎户座</td></tr>
-                                        <tr><td>29</td><td>王良四</td><td>1.91</td><td>英仙座</td></tr>
-                                        <tr><td>30</td><td>氐宿一</td><td>1.98</td><td>天秤座</td></tr>
-                                        <tr><td>31</td><td>尾宿八</td><td>2.00</td><td>天蝎座</td></tr>
-                                        <tr><td>32</td><td>心宿一</td><td>2.06</td><td>天蝎座</td></tr>
-                                        <tr><td>33</td><td>室宿一</td><td>2.06</td><td>飞马座</td></tr>
-                                        <tr><td>34</td><td>室宿二</td><td>2.07</td><td>飞马座</td></tr>
-                                        <tr><td>35</td><td>娄宿三</td><td>2.08</td><td>白羊座</td></tr>
-                                        <tr><td>36</td><td>壁宿二</td><td>2.10</td><td>仙女座</td></tr>
-                                        <tr><td>37</td><td>右旗五</td><td>2.14</td><td>大熊座</td></tr>
-                                        <tr><td>38</td><td>奎宿九</td><td>2.20</td><td>飞马座</td></tr>
-                                        <tr><td>39</td><td>右更二</td><td>2.22</td><td>双鱼座</td></tr>
-                                        <tr><td>40</td><td>左旗五</td><td>2.23</td><td>大熊座</td></tr>
-                                        <tr><td>41</td><td>箕宿一</td><td>2.23</td><td>人马座</td></tr>
-                                        <tr><td>42</td><td>羽林军二十六</td><td>2.23</td><td>船底座</td></tr>
-                                        <tr><td>43</td><td>左旗一</td><td>2.27</td><td>大熊座</td></tr>
-                                        <tr><td>44</td><td>右旗一</td><td>2.34</td><td>大熊座</td></tr>
-                                        <tr><td>45</td><td>天津九</td><td>2.46</td><td>天鹅座</td></tr>
-                                        <tr><td>46</td><td>娄宿增三</td><td>2.64</td><td>白羊座</td></tr>
-                                        <tr><td>47</td><td>氐宿三</td><td>2.75</td><td>天秤座</td></tr>
-                                        <tr><td>48</td><td>建鼓一</td><td>2.83</td><td>天鹰座</td></tr>
-                                        <tr><td>49</td><td>左旗四</td><td>2.87</td><td>大熊座</td></tr>
-                                        <tr><td>50</td><td>玉衡</td><td>2.37</td><td>大熊座</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>星名</th>
+                                    <th>视星等</th>
+                                    <th>所在星座</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>天狼星</td>
+                                    <td>-1.46</td>
+                                    <td>大犬座</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>老人星</td>
+                                    <td>-0.72</td>
+                                    <td>船底座</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>南门二</td>
+                                    <td>-0.27</td>
+                                    <td>半人马座</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>大角星</td>
+                                    <td>-0.04</td>
+                                    <td>牧夫座</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>织女星</td>
+                                    <td>0.03</td>
+                                    <td>琴座</td>
+                                </tr>
+                            </table>
+                            <p style="margin-top: 15px; font-size: 12px; color: #90caf9;">注：表格仅显示前5颗，完整表格包含全天50颗最亮恒星</p>
+                        `
                     },
                     {
                         title: '恒星的基本性质',
@@ -1438,7 +1412,7 @@
         // ==================== 初始化 ====================
         function initializeLibrary() {
             renderCategoryButtons();
-            showCategory('stars', document.querySelector('#categoryButtons .category-btn'));
+            showCategory('stars');
         }
 
         // ==================== 分类按钮渲染 ====================
@@ -1450,13 +1424,13 @@
                 const btn = document.createElement('button');
                 btn.className = 'category-btn active';
                 btn.textContent = category.name;
-                btn.onclick = () => showCategory(key, btn);
+                btn.onclick = () => showCategory(key);
                 container.appendChild(btn);
             });
         }
 
         // ==================== 显示分类内容 ====================
-        function showCategory(categoryKey, activeButton = null) {
+        function showCategory(categoryKey) {
             const category = knowledgeCategories[categoryKey];
             const contentArea = document.getElementById('contentArea');
             
@@ -1464,16 +1438,8 @@
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-           
-            if (activeButton) {
-                activeButton.classList.add('active');
-            } else {
-                const matchedBtn = Array.from(document.querySelectorAll('.category-btn'))
-                    .find(btn => btn.textContent === category.name);
-                if (matchedBtn) {
-                    matchedBtn.classList.add('active');
-                }
-            }
+            event.target.classList.add('active');
+            
             // 清空搜索
             document.getElementById('searchInput').value = '';
             document.getElementById('searchResults').classList.remove('active');
