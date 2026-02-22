@@ -265,6 +265,19 @@
             color: #4caf50;
         }
         
+        .related-questions a {
+            color: #81c784;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .related-questions a:hover {
+            color: #4caf50;
+            text-decoration: underline;
+        }
+        
         .import-section {
             background-color: rgba(255, 152, 0, 0.1);
             border: 2px dashed #ff9800;
@@ -415,6 +428,48 @@
             margin-top: 10px;
         }
 
+        /* ========== 分类选择界面 ========== */
+        .category-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.2) 0%, rgba(66, 165, 245, 0.1) 100%);
+            border: 2px solid #64b5f6;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
+            border-color: #90caf9;
+        }
+
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .category-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #64b5f6;
+        }
+
+        .category-count {
+            font-size: 14px;
+            color: #90caf9;
+            margin-top: 10px;
+        }
+
         /* ========== 答题界面 ========== */
         .quiz-container {
             background-color: rgba(30, 60, 114, 0.3);
@@ -438,22 +493,10 @@
             color: #90caf9;
         }
 
-        .quiz-difficulty {
+        .quiz-category {
             font-size: 16px;
             font-weight: bold;
             color: #64b5f6;
-        }
-
-        .quiz-difficulty.easy {
-            color: #4caf50;
-        }
-
-        .quiz-difficulty.medium {
-            color: #ff9800;
-        }
-
-        .quiz-difficulty.hard {
-            color: #f44336;
         }
 
         .question-number {
@@ -570,6 +613,7 @@
             gap: 15px;
             margin-top: 30px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .quiz-btn {
@@ -693,6 +737,7 @@
             gap: 15px;
             justify-content: center;
             margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         .result-btn {
@@ -784,6 +829,13 @@
                 </p>
             </div>
             
+            <!-- 分类选择界面 -->
+            <div id="categorySelector" style="display: none;">
+                <h3 style="text-align: center; margin: 30px 0;">选择题目分类</h3>
+                <div class="category-selector" id="categorySelectorContainer"></div>
+                <button class="return-btn" onclick="showMenu('questionMenu')">← 返回</button>
+            </div>
+
             <!-- 难度选择界面 -->
             <div id="difficultySelector" style="display: none;">
                 <h3 style="text-align: center; margin: 30px 0;">选择难度等级开始答题</h3>
@@ -804,7 +856,7 @@
                         <div class="difficulty-count" id="hardCount">0 道题</div>
                     </div>
                 </div>
-                <button class="return-btn" onclick="showMenu('questionMenu')">← 返回</button>
+                <button class="return-btn" onclick="backToCategorySelector()">← 返回</button>
             </div>
 
             <!-- 题库分类显示 -->
@@ -820,7 +872,7 @@
                     <div class="quiz-progress">
                         第 <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span> 题
                     </div>
-                    <div class="quiz-difficulty" id="difficultyDisplay"></div>
+                    <div class="quiz-category" id="categoryDisplay"></div>
                 </div>
 
                 <div class="question-number" id="questionNumber"></div>
@@ -865,7 +917,7 @@
                 <div class="result-message" id="resultMessage"></div>
 
                 <div class="result-buttons">
-                    <button class="result-btn again" onclick="backToDifficultySelector()">再做一遍</button>
+                    <button class="result-btn again" onclick="backToCategorySelector()">再做一遍</button>
                     <button class="result-btn menu" onclick="showMenu('mainMenu')">返回主菜单</button>
                 </div>
             </div>
@@ -1313,6 +1365,7 @@
 
         // ==================== 答题状态 ====================
         let quizState = {
+            currentCategory: null,
             currentDifficulty: null,
             currentQuestionIndex: 0,
             questions: [],
@@ -1391,7 +1444,7 @@
             const count = questionBank[categoryKey] ? questionBank[categoryKey].length : 0;
             const elements = document.querySelectorAll(`[id^="question-count-${categoryKey}"]`);
             elements.forEach(el => {
-                el.textContent = count > 0 ? `${count} 道题目` : '暂无题目';
+                el.textContent = count > 0 ? `<a onclick="startCategoryQuiz('${categoryKey}')">${count} 道题 → 开始答题</a>` : '暂无题目';
             });
         }
 
@@ -1507,7 +1560,7 @@
         // ==================== 题库分类显示 ====================
         function renderQuestionCategories() {
             const container = document.getElementById('questionCategoriesContainer');
-            const selector = document.getElementById('difficultySelector');
+            const selector = document.getElementById('categorySelector');
             
             // 检查是否有题目
             const totalQuestions = Object.values(questionBank).reduce((sum, arr) => sum + arr.length, 0);
@@ -1518,8 +1571,56 @@
             } else {
                 container.innerHTML = '';
                 selector.style.display = 'block';
-                updateDifficultyCount();
+                renderCategorySelector();
             }
+        }
+
+        // ==================== 渲染分类选择器 ====================
+        function renderCategorySelector() {
+            const container = document.getElementById('categorySelectorContainer');
+            container.innerHTML = '';
+            
+            const categoryNames = {
+                stars: { name: '⭐ 恒星知识', icon: '⭐' },
+                constellations: { name: '🌌 星座与黄道', icon: '🌌' },
+                planets: { name: '🪐 行星与天体', icon: '🪐' },
+                units: { name: '📏 天文单位与换算', icon: '📏' },
+                spacecraft: { name: '🛸 航天器与探测', icon: '🛸' }
+            };
+            
+            Object.entries(questionBank).forEach(([key, questions]) => {
+                if (questions.length > 0) {
+                    const categoryInfo = categoryNames[key];
+                    const card = document.createElement('div');
+                    card.className = 'category-card';
+                    card.onclick = () => startCategoryQuiz(key);
+                    card.innerHTML = `
+                        <div class="category-icon">${categoryInfo.icon}</div>
+                        <div class="category-name">${categoryInfo.name}</div>
+                        <div class="category-count">${questions.length} 道题</div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+        }
+
+        // ==================== 开始分类答题 ====================
+        function startCategoryQuiz(categoryKey) {
+            quizState.currentCategory = categoryKey;
+            
+            // 按难度分类
+            const allQuestions = questionBank[categoryKey];
+            const easyCount = allQuestions.filter(q => q.difficulty === 'easy').length;
+            const mediumCount = allQuestions.filter(q => q.difficulty === 'medium').length;
+            const hardCount = allQuestions.filter(q => q.difficulty === 'hard').length;
+            
+            document.getElementById('easyCount').textContent = `${easyCount} 道题`;
+            document.getElementById('mediumCount').textContent = `${mediumCount} 道题`;
+            document.getElementById('hardCount').textContent = `${hardCount} 道题`;
+            
+            // 显示难度选择
+            document.getElementById('categorySelector').style.display = 'none';
+            document.getElementById('difficultySelector').style.display = 'block';
         }
 
         // ==================== 更新难度计数 ====================
@@ -1536,8 +1637,8 @@
 
         // ==================== 开始答题 ====================
         function startQuiz(difficulty) {
-            const allQuestions = Object.values(questionBank).flat();
-            const filteredQuestions = allQuestions.filter(q => q.difficulty === difficulty);
+            const categoryQuestions = questionBank[quizState.currentCategory];
+            const filteredQuestions = categoryQuestions.filter(q => q.difficulty === difficulty);
             
             if (filteredQuestions.length === 0) {
                 alert('该难度等级暂无题目');
@@ -1553,15 +1654,16 @@
             quizState.correctCount = 0;
             quizState.wrongCount = 0;
             
-            // 设置难度显示
-            const difficultyMap = {
-                easy: '低难度',
-                medium: '中难度',
-                hard: '高难度'
+            // 设置分类显示
+            const categoryNames = {
+                stars: '⭐ 恒星知识',
+                constellations: '🌌 星座与黄道',
+                planets: '🪐 行星与天体',
+                units: '📏 天文单位与换算',
+                spacecraft: '🛸 航天器与探测'
             };
             
-            document.getElementById('difficultyDisplay').textContent = difficultyMap[difficulty];
-            document.getElementById('difficultyDisplay').className = `quiz-difficulty ${difficulty}`;
+            document.getElementById('categoryDisplay').textContent = categoryNames[quizState.currentCategory];
             document.getElementById('totalQuestions').textContent = quizState.questions.length;
             
             showMenu('quizMenu');
@@ -1717,8 +1819,10 @@
             showMenu('resultMenu');
         }
 
-        // ==================== 返回难度选择 ====================
-        function backToDifficultySelector() {
+        // ==================== 返回分类选择 ====================
+        function backToCategorySelector() {
+            document.getElementById('categorySelector').style.display = 'block';
+            document.getElementById('difficultySelector').style.display = 'none';
             showMenu('questionMenu');
         }
 
@@ -1729,138 +1833,3 @@
     </script>
 </body>
 </html>
-完美！我已经为你生成了完整的更新代码。现在让我为你创建一个 JSON 格式的题库示例文件，这样你就可以直接导入你的题目了：
-
-Dockerfile
-[
-  {
-    "category": "constellations",
-    "question": "01. 今年\"五一\"假日期间的月相是（ ）。",
-    "options": [
-      "(A) 下弦月",
-      "(B) 蛾眉月",
-      "(C) 残月",
-      "(D) 满月"
-    ],
-    "answer": 1,
-    "difficulty": "easy",
-    "explanation": "月相周期：朔（初一，不见月）-蛾眉月（初三前后，日落，西南方，小月牙）-上弦月（初七初八，放学，正南方）-满月（十五前后，太阳落山，东出）-下弦月（廿三前后，0点东出）-残月（月底，出现在黎明东方）。五一假期通常在农历四月，需要查看具体年份的农历日期。"
-  },
-  {
-    "category": "stars",
-    "question": "02. 在最好的观测时机，以下行星在地球上观测最亮的是（ ）。",
-    "options": [
-      "(A) 金星",
-      "(B) 木星",
-      "(C) 火星",
-      "(D) 土星"
-    ],
-    "answer": 0,
-    "difficulty": "easy",
-    "explanation": "大行星亮度排序：金星：-4.4等，水星：-2.6等，火星：-2.9等，木星：-2.9等，土星：-0.3等。金星是最亮的行星。"
-  },
-  {
-    "category": "stars",
-    "question": "03. 以下恒星目视最暗的是（ ）。",
-    "options": [
-      "(A) 造父一",
-      "(B) 天关",
-      "(C) 辇道增七",
-      "(D) 大陵五"
-    ],
-    "answer": 0,
-    "difficulty": "hard",
-    "explanation": "造父一是一颗变星，平均星等约4等，是造父变星的\"典型星\"。天关（ζ Tau）视星等：2.88-3.17，辇道增七视星等：3.18，大陵五视星等：2.12等。造父一最暗。"
-  },
-  {
-    "category": "constellations",
-    "question": "04. 第一个通过观测证认出蜂巢星团 M44 中恒星的天文学家是（ ）。",
-    "options": [
-      "(A) 赫维留",
-      "(B) 梅西叶",
-      "(C) 伽利略",
-      "(D) 威廉赫歇尔"
-    ],
-    "answer": 2,
-    "difficulty": "hard",
-    "explanation": "伽利略最早观测鬼星团（M44，@巨蟹座）。伽利略的其他贡献：最早使用天文望远镜；通过太阳黑子发现太阳自转周期；发现木星卫星（伽利略卫星）；通过金星相位变化判定金星围绕太阳公转；发现银河是由无数恒星组成的；发现月球有山脉地形。"
-  },
-  {
-    "category": "constellations",
-    "question": "05. 以下星座中全部适合在北半球冬季观测的是（ ）。",
-    "options": [
-      "(A) 猎户座、御夫座、天龙座、半人马座",
-      "(B) 双子座、武仙座、猎犬座、大犬座",
-      "(C) 双子座、猎户座、大犬座、豺狼座",
-      "(D) 双子座、御夫座、猎户座、天兔座"
-    ],
-    "answer": 3,
-    "difficulty": "medium",
-    "explanation": "北半球冬季（12月-2月）主要星座：双子座、猎户座、大犬座、小犬座、御夫座、天兔座等。半人马座在南半球可见。武仙座在夏季观测。天龙座全年可见但不是冬季主要星座。"
-  },
-  {
-    "category": "planets",
-    "question": "06. 太阳系中最大的行星是（ ）。",
-    "options": [
-      "(A) 土星",
-      "(B) 木星",
-      "(C) 天王星",
-      "(D) 海王星"
-    ],
-    "answer": 1,
-    "difficulty": "easy",
-    "explanation": "木星是太阳系中最大的行星，其直径约为地球的11倍，质量约为地球的318倍。"
-  },
-  {
-    "category": "planets",
-    "question": "07. 火星有几个卫星？",
-    "options": [
-      "(A) 1个",
-      "(B) 2个",
-      "(C) 3个",
-      "(D) 4个"
-    ],
-    "answer": 1,
-    "difficulty": "easy",
-    "explanation": "火星有两个卫星：火卫一（Phobos）和火卫二（Deimos）。"
-  },
-  {
-    "category": "units",
-    "question": "08. 1光年等于多少秒差距？",
-    "options": [
-      "(A) 0.3 pc",
-      "(B) 3.26 pc",
-      "(C) 1 pc",
-      "(D) 10 pc"
-    ],
-    "answer": 0,
-    "difficulty": "medium",
-    "explanation": "1秒差距（pc）= 3.26光年，所以1光年 ≈ 0.3秒差距。"
-  },
-  {
-    "category": "spacecraft",
-    "question": "09. 中国首个月球探测器是（ ）。",
-    "options": [
-      "(A) 嫦娥一号",
-      "(B) 嫦娥二号",
-      "(C) 嫦娥三号",
-      "(D) 嫦娥四号"
-    ],
-    "answer": 0,
-    "difficulty": "easy",
-    "explanation": "嫦娥一号是中国首个月球探测器，于2007年10月24日发射。"
-  },
-  {
-    "category": "spacecraft",
-    "question": "10. 中国首个火星探测器是（ ）。",
-    "options": [
-      "(A) 天问一号",
-      "(B) 祝融号",
-      "(C) 火星一号",
-      "(D) 探火号"
-    ],
-    "answer": 0,
-    "difficulty": "medium",
-    "explanation": "天问一号是中国首个火星探测器，于2020年7月23日发射。祝融号是天问一号的火星车。"
-  }
-]
