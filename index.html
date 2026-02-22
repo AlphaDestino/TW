@@ -189,6 +189,51 @@
             min-height: 400px;
         }
         
+        .content-page {
+            display: none;
+        }
+        
+        .content-page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .content-page h4 {
+            color: #90caf9;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .content-page p, .content-page ul, .content-page table {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .content-page ul {
+            margin-left: 20px;
+        }
+        
+        .content-page li {
+            margin-bottom: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        table th, table td {
+            border: 1px solid #64b5f6;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        table th {
+            background-color: rgba(100, 181, 246, 0.2);
+            color: #64b5f6;
+        }
+        
         .knowledge-item {
             background-color: rgba(100, 181, 246, 0.1);
             border-left: 4px solid #64b5f6;
@@ -220,6 +265,35 @@
             color: #4caf50;
         }
         
+        .import-section {
+            background-color: rgba(255, 152, 0, 0.1);
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .import-section h4 {
+            color: #ffb74d;
+            margin-bottom: 15px;
+        }
+        
+        .import-btn {
+            background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%);
+            border-color: #ffb74d;
+            padding: 12px 30px;
+            font-size: 16px;
+        }
+        
+        .import-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 152, 0, 0.6);
+        }
+        
+        #questionImportInput {
+            display: none;
+        }
+        
         .return-btn {
             background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
             border-color: #ef5350;
@@ -244,13 +318,6 @@
             padding: 12px;
             margin-bottom: 10px;
             border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .question-item:hover {
-            background-color: rgba(100, 181, 246, 0.2);
-            transform: translateX(3px);
         }
         
         .question-item strong {
@@ -263,140 +330,11 @@
             color: #90caf9;
         }
         
-        .question-detail {
-            background-color: rgba(100, 181, 246, 0.15);
-            border: 2px solid #64b5f6;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .question-detail h4 {
-            color: #64b5f6;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-        
-        .question-options {
-            margin: 15px 0;
-        }
-        
-        .option {
-            padding: 12px;
-            margin: 10px 0;
-            background-color: rgba(100, 181, 246, 0.1);
-            border-left: 3px solid #42a5f5;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .option:hover {
-            background-color: rgba(100, 181, 246, 0.2);
-            transform: translateX(3px);
-        }
-        
-        .option.selected {
-            background-color: rgba(255, 193, 7, 0.2);
-            border-left-color: #ffc107;
-        }
-        
-        .option.correct {
-            background-color: rgba(76, 175, 80, 0.2);
-            border-left-color: #4caf50;
-        }
-        
-        .option.incorrect {
-            background-color: rgba(244, 67, 54, 0.2);
-            border-left-color: #f44336;
-        }
-        
-        .answer-section {
-            background-color: rgba(76, 175, 80, 0.1);
-            border-left: 4px solid #4caf50;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 4px;
-        }
-        
-        .answer-section strong {
-            color: #4caf50;
-        }
-        
-        .answer-section p {
-            margin-top: 10px;
-            line-height: 1.6;
-        }
-        
         .empty-state {
             text-align: center;
             color: #90caf9;
             padding: 30px;
             font-size: 16px;
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .stat-card {
-            background-color: rgba(100, 181, 246, 0.1);
-            border: 2px solid #64b5f6;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-        }
-        
-        .stat-card h4 {
-            color: #64b5f6;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-        
-        .stat-card .number {
-            font-size: 28px;
-            color: #ffb74d;
-            font-weight: bold;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        
-        table th, table td {
-            border: 1px solid #64b5f6;
-            padding: 10px;
-            text-align: left;
-        }
-        
-        table th {
-            background-color: rgba(100, 181, 246, 0.2);
-            color: #64b5f6;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-            border-color: #81c784;
-            padding: 12px 30px;
-            font-size: 16px;
-            margin-top: 15px;
-        }
-        
-        .submit-btn:hover {
-            box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
-        }
-        
-        .question-counter {
-            text-align: center;
-            color: #90caf9;
-            margin-bottom: 15px;
-            font-size: 14px;
         }
     </style>
 </head>
@@ -407,7 +345,7 @@
             <h1>🌟 天文知识库与题库系统 🌟</h1>
             <div class="menu-buttons">
                 <button onclick="showMenu('libMenu')">📚 知识点库</button>
-                <button onclick="showMenu('questionMenu')">❓ 题库练习</button>
+                <button onclick="showMenu('questionMenu')">❓ 题库</button>
             </div>
         </div>
 
@@ -440,10 +378,18 @@
 
         <!-- 题库菜单 -->
         <div id="questionMenu" class="menu">
-            <h2>❓ 题库练习</h2>
+            <h2>❓ 题库</h2>
             
-            <!-- 统计信息 -->
-            <div class="stats" id="statsContainer"></div>
+            <!-- 题库导入区域 -->
+            <div class="import-section">
+                <h4>📥 导入题库</h4>
+                <p style="margin-bottom: 15px; color: #ffb74d;">支持 JSON 格式的题库文件导入</p>
+                <button class="import-btn" onclick="document.getElementById('questionImportInput').click()">选择文件导入</button>
+                <input type="file" id="questionImportInput" accept=".json" onchange="importQuestionBank()">
+                <p style="margin-top: 15px; font-size: 12px; color: #90caf9;">
+                    提示：JSON 格式应包含 category（分类）、question（题目）、options（选项）、answer（答案）等字段
+                </p>
+            </div>
             
             <!-- 题库分类显示 -->
             <div id="questionCategoriesContainer" style="margin-top: 30px;"></div>
@@ -458,13 +404,12 @@
             stars: {
                 name: '⭐ 恒星知识',
                 icon: '⭐',
-                keywords: ['恒星', '亮星', '天狼星', '老人星', '南门二', '大角星', '织女星', '视星等', '绝对星等', '光度', '造父变星'],
+                keywords: ['恒星', '亮星', '天狼星', '老人星', '南门二', '大角星', '织女星', '视星等', '绝对星等', '光度'],
                 content: [
                     {
                         title: '全天五十亮星表',
                         description: '全天最亮的50颗恒星按视星等排列',
                         details: `
-                            <h4>前十亮星排名</h4>
                             <table>
                                 <tr>
                                     <th>排名</th>
@@ -502,37 +447,8 @@
                                     <td>0.03</td>
                                     <td>琴座</td>
                                 </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>五车二</td>
-                                    <td>0.08</td>
-                                    <td>御夫座</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>参宿七</td>
-                                    <td>0.12</td>
-                                    <td>猎户座</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>南河三</td>
-                                    <td>0.38</td>
-                                    <td>小犬座</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>参宿四</td>
-                                    <td>0.5</td>
-                                    <td>猎户座</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>水委一</td>
-                                    <td>0.46</td>
-                                    <td>波江座</td>
-                                </tr>
                             </table>
+                            <p style="margin-top: 15px; font-size: 12px; color: #90caf9;">注：表格仅显示前5颗，完整表格包含全天50颗最亮恒星</p>
                         `
                     },
                     {
@@ -547,13 +463,8 @@
                                 <li><strong>表面温度</strong>：决定恒星的颜色和光谱类型</li>
                                 <li><strong>质量</strong>：恒星的物质总量</li>
                             </ul>
-                            <h4>造父变星</h4>
-                            <ul>
-                                <li>具有明确的周期-光度关系</li>
-                                <li>周期可通过观测得到，从而计算光度</li>
-                                <li>用于测量距离的标准烛光</li>
-                                <li>造父一是造父变星的典型代表</li>
-                            </ul>
+                            <h4>赫罗图</h4>
+                            <p>赫罗图是以绝对星等为纵轴、光谱类型（或表面温度）为横轴的图表，显示恒星的演化规律。</p>
                         `
                     }
                 ]
@@ -562,7 +473,7 @@
             constellations: {
                 name: '🌌 星座与黄道',
                 icon: '🌌',
-                keywords: ['星座', '黄道', '十二宫', '白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯', '水瓶', '双鱼', '星座记忆', '月相'],
+                keywords: ['星座', '黄道', '十二宫', '白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯', '水瓶', '双鱼', '星座记忆'],
                 content: [
                     {
                         title: '黄道十二宫表',
@@ -651,18 +562,74 @@
                         `
                     },
                     {
-                        title: '月相周期',
-                        description: '月球在公转过程中的各个阶段',
+                        title: 'β星比α星亮的星座',
+                        description: '在某些星座中，β星的亮度比α星更亮',
                         details: `
-                            <h4>月相周期（约29.5天）</h4>
-                            <ul>
-                                <li><strong>朔</strong>：初一，月球在太阳和地球之间，不见月</li>
-                                <li><strong>蛾眉月</strong>：初三前后，日落时西南方可见小月牙</li>
-                                <li><strong>上弦月</strong>：初七初八，放学时正南方可见半月</li>
-                                <li><strong>满月</strong>：十五前后，太阳落山时东方升起</li>
-                                <li><strong>下弦月</strong>：廿三前后，午夜时东方升起</li>
-                                <li><strong>残月</strong>：月底，出现在黎明东方</li>
-                            </ul>
+                            <table>
+                                <tr>
+                                    <th>星座</th>
+                                    <th>α星</th>
+                                    <th>α星视星等</th>
+                                    <th>β星</th>
+                                    <th>β星视星等</th>
+                                </tr>
+                                <tr>
+                                    <td>金牛座</td>
+                                    <td>毕宿五</td>
+                                    <td>0.85</td>
+                                    <td>毕宿二</td>
+                                    <td>1.65</td>
+                                </tr>
+                                <tr>
+                                    <td>巨蟹座</td>
+                                    <td>北极星增四</td>
+                                    <td>4.26</td>
+                                    <td>鬼宿</td>
+                                    <td>3.52</td>
+                                </tr>
+                                <tr>
+                                    <td>狮子座</td>
+                                    <td>轩辕十四</td>
+                                    <td>1.35</td>
+                                    <td>五帝座一</td>
+                                    <td>1.44</td>
+                                </tr>
+                                <tr>
+                                    <td>处女座</td>
+                                    <td>角宿一</td>
+                                    <td>0.98</td>
+                                    <td>角宿二</td>
+                                    <td>1.84</td>
+                                </tr>
+                                <tr>
+                                    <td>天蝎座</td>
+                                    <td>心宿二</td>
+                                    <td>0.96</td>
+                                    <td>心宿增十</td>
+                                    <td>1.91</td>
+                                </tr>
+                                <tr>
+                                    <td>射手座</td>
+                                    <td>斗宿一</td>
+                                    <td>2.59</td>
+                                    <td>斗宿二</td>
+                                    <td>1.83</td>
+                                </tr>
+                                <tr>
+                                    <td>摩羯座</td>
+                                    <td>垒壁阵一</td>
+                                    <td>3.57</td>
+                                    <td>垒壁阵二</td>
+                                    <td>3.03</td>
+                                </tr>
+                                <tr>
+                                    <td>双鱼座</td>
+                                    <td>右更一</td>
+                                    <td>3.82</td>
+                                    <td>右更二</td>
+                                    <td>2.04</td>
+                                </tr>
+                            </table>
                         `
                     }
                 ]
@@ -671,7 +638,7 @@
             planets: {
                 name: '🪐 行星与天体',
                 icon: '🪐',
-                keywords: ['行星', '天体', '太阳系', '地球', '火星', '金星', '木星', '土星', '水星', '天王星', '海王星', '冥王星', '小行星', '彗星', '公转周期', '自转周期'],
+                keywords: ['行星', '天体', '太阳系', '地球', '火星', '金星', '木星', '土星', '水星', '天王星', '海王星', '冥王星', '小行星', '彗星'],
                 content: [
                     {
                         title: '太阳系八大行星',
@@ -679,14 +646,14 @@
                         details: `
                             <h4>八大行星（按距太阳远近排列）</h4>
                             <ul>
-                                <li><strong>水星</strong>：最小的行星，距太阳最近，公转周期88天</li>
-                                <li><strong>金星</strong>：最亮的行星，表面温度最高，自转周期243天（逆向）</li>
-                                <li><strong>地球</strong>：唯一有生命的行星，公转周期365天</li>
-                                <li><strong>火星</strong>：红色行星，有两个卫星，公转周期687天</li>
-                                <li><strong>木星</strong>：最大的行星，有强大的磁场，公转周期11.8年</li>
-                                <li><strong>土星</strong>：以美丽的光环著称，公转周期29.5年</li>
-                                <li><strong>天王星</strong>：自转轴倾斜最大，公转周期84年</li>
-                                <li><strong>海王星</strong>：距太阳最远的行星，公转周期165年</li>
+                                <li><strong>水星</strong>：最小的行星，距太阳最近</li>
+                                <li><strong>金星</strong>：最亮的行星，表面温度最高</li>
+                                <li><strong>地球</strong>：唯一有生命的行星</li>
+                                <li><strong>火星</strong>：红色行星，有两个卫星</li>
+                                <li><strong>木星</strong>：最大的行星，有强大的磁场</li>
+                                <li><strong>土星</strong>：以美丽的光环著称</li>
+                                <li><strong>天王星</strong>：自转轴倾斜最大</li>
+                                <li><strong>海王星</strong>：距太阳最远的行星</li>
                             </ul>
                             <h4>行星的分类</h4>
                             <ul>
@@ -710,7 +677,6 @@
                                 <li>由冰、岩石和尘埃组成</li>
                                 <li>接近太阳时会形成彗尾</li>
                                 <li>著名彗星：哈雷彗星（76年回归一次）</li>
-                                <li>来自太阳系外的彗星：2I/鲍里索夫</li>
                             </ul>
                         `
                     }
@@ -720,7 +686,7 @@
             units: {
                 name: '📏 天文单位与换算',
                 icon: '📏',
-                keywords: ['换算', '单位', '天文单位', '光年', '秒差距', '角度', '亮度', '距离', 'AU', 'pc', 'ly', '星等', '多普勒'],
+                keywords: ['换算', '单位', '天文单位', '光年', '秒差距', '角度', '亮度', '距离', 'AU', 'pc', 'ly'],
                 content: [
                     {
                         title: '天文单位换算',
@@ -756,7 +722,7 @@
             spacecraft: {
                 name: '🛸 航天器与探测',
                 icon: '🛸',
-                keywords: ['航天器', '航天', '卫星', '飞船', '探测器', '神舟', '天宫', '天舟', '北斗', '嫦娥', '祝融', '国内', '国际', '空间站', '望远镜', '哈勃', '韦伯', 'GPS', '伽利略', '火星', '月球', 'JWST', 'ISS'],
+                keywords: ['航天器', '航天', '卫星', '飞船', '探测器', '神舟', '天宫', '天舟', '北斗', '嫦娥', '祝融', '国内', '国际', '空间站', '望远镜', '哈勃', '韦伯', 'GPS', '伽利略', '火星', '月球'],
                 content: [
                     {
                         title: '国内航天器',
@@ -826,16 +792,16 @@
                                     <td>科学研究</td>
                                 </tr>
                                 <tr>
-                                    <td>哈勃太空望远镜 (HST)</td>
+                                    <td>哈勃太空望远镜</td>
                                     <td>美国/欧洲</td>
                                     <td>空间望远镜</td>
-                                    <td>紫外、可见光、近红外观测</td>
+                                    <td>天文观测</td>
                                 </tr>
                                 <tr>
-                                    <td>詹姆斯·韦伯太空望远镜 (JWST)</td>
+                                    <td>詹姆斯·韦伯太空望远镜</td>
                                     <td>美国/欧洲/加拿大</td>
                                     <td>空间望远镜</td>
-                                    <td>红外深空观测</td>
+                                    <td>深空观测</td>
                                 </tr>
                                 <tr>
                                     <td>GPS卫星</td>
@@ -862,242 +828,13 @@
             }
         };
 
-        // ==================== 题库数据 ====================
-        const questionBank = {
-            stars: [
-                {
-                    id: 3,
-                    question: "以下恒星目视最暗的是（ ）",
-                    options: ["A. 造父一", "B. 天关", "C. 辇道增七", "D. 大陵五"],
-                    answer: "A",
-                    explanation: "造父一是造父变星的典型星，视星等约3.48-4.37等，是最暗的。造父变星的周期-光度关系用于测量距离"
-                },
-                {
-                    id: 16,
-                    question: "天文学家第一次测出太阳系到银心的距离时使用了哪种天体？（ ）",
-                    options: ["A. 银心附近的恒星", "B. 超新星", "C. 造父变星", "D. 球状星团"],
-                    answer: "C",
-                    explanation: "造父变星具有周期-光度关系，哈勃用此方法研究星系距离，发现宇宙膨胀"
-                },
-                {
-                    id: 17,
-                    question: "以下恒星中目视从亮到暗排序正确的是（ ）",
-                    options: ["A. 老人星 > 参宿七 > 南门二 > 轩辕十四 > 河鼓二", "B. 天狼星 > 南门二 > 角宿一 > 河鼓二 > 水委一", "C. 天狼星 > 老人星 > 织女 > 水委一 > 轩辕十四", "D. 天狼星 > 织女 > 水委一 > 轩辕十四 > 心宿二"],
-                    answer: "C",
-                    explanation: "前十亮星排名：天狼星(-1.46)>老人星(-0.72)>南门二(-0.27)>大角星(-0.04)>织女(0.03)>五车二(0.08)>参宿七(0.12)>南河三(0.38)>参宿四(0.5)>水委一(0.46)"
-                },
-                {
-                    id: 28,
-                    question: ""金属"（除氢、氦以外的其他元素）占太阳质量的百分之（ ）",
-                    options: ["A. 15", "B. 0.015", "C. 0.15", "D. 1.5"],
-                    answer: "D",
-                    explanation: "太阳中"金属"（重元素）的质量比约为1.5%"
-                }
-            ],
-            constellations: [
-                {
-                    id: 1,
-                    question: "今年"五一"假日期间的月相是（ ）",
-                    options: ["A. 下弦月", "B. 蛾眉月", "C. 残月", "D. 满月"],
-                    answer: "B",
-                    explanation: "月相周期：朔（初一）-蛾眉月（初三前后，日落西南方）-上弦月（初七初八）-满月（十五前后）-下弦月（廿三前后）-残月（月底）"
-                },
-                {
-                    id: 5,
-                    question: "以下星座中全部适合在北半球冬季观测的是（ ）",
-                    options: ["A. 猎户座、御夫座、天龙座、半人马座", "B. 双子座、武仙座、猎犬座、大犬座", "C. 双子座、猎户座、大犬座、豺狼座", "D. 双子座、御夫座、猎户座、天兔座"],
-                    answer: "D",
-                    explanation: "北半球冬季星空的主要星座：双子座、御夫座、猎户座、天兔座等"
-                },
-                {
-                    id: 18,
-                    question: "由于光速有限，我们观察到的天体位置与其真实位置之间存在偏差，也就是光行差。参宿四的视位置向东偏离最大发生在北半球的（ ）",
-                    options: ["A. 冬季", "B. 春季", "C. 夏季", "D. 秋季"],
-                    answer: "C",
-                    explanation: "光行差是由于地球公转和光速有限造成的。夏季地球向东运动，参宿四视位置向东偏离最大"
-                }
-            ],
-            planets: [
-                {
-                    id: 2,
-                    question: "在最好的观测时机，以下行星在地球上观测最亮的是（ ）",
-                    options: ["A. 金星", "B. 木星", "C. 火星", "D. 土星"],
-                    answer: "A",
-                    explanation: "大行星亮度：金星-4.4等，水星-2.6等，火星-2.9等，木星-2.9等，土星-0.3等。金星最亮"
-                },
-                {
-                    id: 11,
-                    question: "以下月海中位于月球背面的是（ ）",
-                    options: ["A. 莫斯科海", "B. 静海", "C. 危海", "D. 酒海"],
-                    answer: "A",
-                    explanation: "莫斯科海位于月球背面"
-                },
-                {
-                    id: 12,
-                    question: "做暑假作业让你感觉度日如年。在哪个行星上，不做作业也会"度日如年"？（ ）",
-                    options: ["A. 天王星", "B. 金星", "C. 水星", "D. 火星"],
-                    answer: "B",
-                    explanation: "金星的自转周期243天，公转周期225天，自转比公转还慢，所以一个金星日（太阳日）比一个金星年还长"
-                },
-                {
-                    id: 25,
-                    question: "以下哪颗彗星来自太阳系之外？（ ）",
-                    options: ["A. D/1993 F2 苏梅克列维 9 号", "B. 2I/鲍里索夫", "C. 2P/恩克", "D. C/1995 O1 海尔波普"],
-                    answer: "B",
-                    explanation: "2I/鲍里索夫是第一个被确认来自太阳系外的彗星"
-                },
-                {
-                    id: 26,
-                    question: "在距太阳 200au 处放置一块石头，其由静止至落入太阳大约需要花多长时间？（ ）",
-                    options: ["A. 5000 年", "B. 100 年", "C. 500 年", "D. 1000 年"],
-                    answer: "C",
-                    explanation: "根据开普勒第三定律，周期T²∝a³，从200AU落入太阳约需500年"
-                },
-                {
-                    id: 32,
-                    question: "在 2021 年的美国电影《不要抬头》（Don't look up）中，主人公研究已耗尽气体的宁静星系中超新星时发现了一颗要撞击地球的彗星。考虑各种类型超新星的前身星，在这类星系中最常发现的超新星是（ ）",
-                    options: ["A. II 型超新星", "B. Ia 型超新星", "C. Ib 型超新星", "D. Ic 型超新星"],
-                    answer: "B",
-                    explanation: "在已耗尽气体的星系中，最常见的是Ia型超新星，来自白矮星吸积伴星物质"
-                }
-            ],
-            units: [
-                {
-                    id: 7,
-                    question: "北京冬奥会开幕式上展映的二十四节气倒计时短片惊艳世界。二十四节气体现的是中国传统天文学中的（ ）部分",
-                    options: ["A. 公历", "B. 阴历", "C. 阳历", "D. 阴阳合历"],
-                    answer: "C",
-                    explanation: "二十四节气源自阳历（太阳历），定回归年，指导农耕。公历是阳历的一种"
-                },
-                {
-                    id: 8,
-                    question: "下列哪个不是中国古代的宇宙学说？（ ）",
-                    options: ["A. 日心说", "B. 盖天说", "C. 浑天说", "D. 宣夜说"],
-                    answer: "A",
-                    explanation: "日心说是哥白尼提出的。中国古代宇宙学说有：盖天说、浑天说、宣夜说"
-                },
-                {
-                    id: 10,
-                    question: "两地的地方恒星时相差 4h15m，那么地理经度相差（ ）",
-                    options: ["A. 60 度 15 分", "B. 4 度 15 分", "C. 63 度 45 分", "D. 127 度 30 分"],
-                    answer: "C",
-                    explanation: "两地地方恒星时的差（小时表示）=两地经度的差（度表示）。1h=15°，4h15m=4.25h=63.75°=63°45'"
-                },
-                {
-                    id: 22,
-                    question: "在北纬 30 度某地，使用一台物镜焦距 1000 毫米的望远镜配以圆形视场为 46 度的 25 毫米目镜，观测一颗位于天顶附近的恒星。调整该星位于视场中央，如果此时停止跟踪，那么该星会在多少秒后移出视场？（ ）",
-                    options: ["A. 188", "B. 118", "C. 143", "D. 161"],
-                    answer: "D",
-                    explanation: "视场直径=46°，天体视运动速度=15°/小时=0.25°/分=15'/分=900\"/分。移出时间=46°/(15°/小时)≈184秒"
-                },
-                {
-                    id: 23,
-                    question: "亮度相差百分之十的两颗星，星等大约相差多少？（ ）",
-                    options: ["A. 1 等", "B. 0.001 等", "C. 0.01 等", "D. 0.1 等"],
-                    answer: "D",
-                    explanation: "星等差Δm=-2.5lg(L1/L2)。亮度比为1.1时，Δm=-2.5lg(1.1)≈-0.1等"
-                },
-                {
-                    id: 24,
-                    question: "第一个建立了热大爆炸宇宙学模型的科学家是（ ）",
-                    options: ["A. 伽莫夫", "B. 爱因斯坦", "C. 哈勃", "D. 奥本海默"],
-                    answer: "A",
-                    explanation: "伽莫夫建立了热大爆炸宇宙学模型"
-                },
-                {
-                    id: 27,
-                    question: "现行农历意义上的立春被定义为（ ）",
-                    options: ["A. 太阳黄经 315 度的时刻", "B. 太阳赤经 0 度的时刻", "C. 太阳黄经 0 度的时刻", "D. 太阳赤经 315 度的时刻"],
-                    answer: "A",
-                    explanation: "立春是太阳黄经315°的时刻"
-                },
-                {
-                    id: 29,
-                    question: "在红移 z=1 时宇宙的尺度因子是现在的（ ）",
-                    options: ["A. 10 倍", "B. 十分之一", "C. 一半", "D. 2 倍"],
-                    answer: "B",
-                    explanation: "红移z与尺度因子a的关系：1+z=1/a，当z=1时，a=1/2"
-                },
-                {
-                    id: 30,
-                    question: "分子热运动会造成谱线的多普勒展宽。同样温度下，碳原子谱线的展宽是氢原子谱线的（ ）",
-                    options: ["A. 24 倍", "B. 1/12", "C. 1/3.5", "D. 12 倍"],
-                    answer: "B",
-                    explanation: "多普勒展宽与√(M)成反比，碳的质量是氢的12倍，所以展宽比为1/√12≈1/3.5"
-                }
-            ],
-            spacecraft: [
-                {
-                    id: 4,
-                    question: "第一个通过观测证认出蜂巢星团 M44 中恒星的天文学家是（ ）",
-                    options: ["A. 赫维留", "B. 梅西叶", "C. 伽利略", "D. 威廉赫歇尔"],
-                    answer: "C",
-                    explanation: "伽利略最早观测鬼星团（M44，巨蟹座）；发现木星卫星；通过金星相位变化判定金星围绕太阳公转；发现银河由无数恒星组成"
-                },
-                {
-                    id: 6,
-                    question: "今年（2022年）是中国天文学会成立 100 周年，1922 年中国天文学会成立于（ ）",
-                    options: ["A. 北京古观象台", "B. 紫金山天文台", "C. 徐家汇天文台", "D. 北京天文馆"],
-                    answer: "A",
-                    explanation: "1922年中国天文学会成立于北京古观象台，后来迁移至南京的紫金山天文台"
-                },
-                {
-                    id: 9,
-                    question: "以下哪个探测器的主要目标是小行星？（ ）",
-                    options: ["A. 朱诺（Juno）", "B. 帕克（Parker）", "C. 露西（Lucy）", "D. 马文（MAVEN）"],
-                    answer: "C",
-                    explanation: "露西号将进行七次飞掠任务，探测一颗主带小行星和六颗木星特洛伊族小行星"
-                },
-                {
-                    id: 13,
-                    question: "日前我国的硬 X 射线调制望远镜（慧眼卫星，HXMT）首次认证了快速射电暴 FRB200428 的高能对应体，证明了该快速射电暴来源于（ ）",
-                    options: ["A. 地外文明", "B. 黑洞吸积辐射", "C. 高度磁化中子星", "D. 激变双星"],
-                    answer: "C",
-                    explanation: "快速射电暴来源于高度磁化中子星"
-                },
-                {
-                    id: 14,
-                    question: "目前国际空间站（ISS）主要依靠以下哪类飞船来进行货物补给？（ ）",
-                    options: ["A. 美国 Starliner 飞船", "B. 俄罗斯进步号飞船", "C. 美国天鹅座飞船", "D. 美国龙飞船"],
-                    answer: "B",
-                    explanation: "进步号货运飞船是由俄罗斯科罗廖夫能源火箭航天集团研制，用于向国际空间站运送货物"
-                },
-                {
-                    id: 15,
-                    question: "以下梅西叶天体分类正确的是（ ）",
-                    options: ["A. M31、M33、M81、M100、M101 都是旋涡星系", "B. M3、M7、M13、M30、M35 都是球状星团", "C. M1、M8、M20、M28、M78 都是发射星云", "D. M27、M57、M76、M97、M108 都是行星状星云"],
-                    answer: "A",
-                    explanation: "M31（仙女座星系）、M33、M81、M100、M101都是旋涡星系"
-                },
-                {
-                    id: 19,
-                    question: "于 2021 年底发射的詹姆斯韦布空间望远镜（JWST）的主要工作波段为（ ）",
-                    options: ["A. X 射线", "B. 光学", "C. 红外", "D. 射电"],
-                    answer: "C",
-                    explanation: "JWST是哈勃太空望远镜的继任者，主要工作波段为红外，耗资100亿美元"
-                },
-                {
-                    id: 20,
-                    question: "JWST 已经到达了日地达拉格朗日 L2 点，距离地球 150 万千米。如果日地距离按 1.5 亿千米计算，在L2 点所见日面未被地球遮挡部分的面积占视面积的百分之（ ）",
-                    options: ["A. 22 至 35", "B. 2 以下", "C. 2 至 10", "D. 11 至 21"],
-                    answer: "D",
-                    explanation: "JWST围绕L2点旋转，轨道平面和黄道面垂直"
-                },
-                {
-                    id: 21,
-                    question: "研究星系中的分子气体主要会使用以下哪个望远镜？（ ）",
-                    options: ["A. XMM-Newton", "B. ALMA", "C. HST", "D. eROSITA"],
-                    answer: "B",
-                    explanation: "ALMA是阿塔卡玛毫米/亚毫米波阵列望远镜，用于研究星系中的分子气体"
-                },
-                {
-                    id: 31,
-                    question: "设计中的中国空间站望远镜 CSST 上拍摄的无缝光谱分辨率约为 R~200，这一分辨率意味着望远镜可以分辨出位于波长 x 和波长(1+1/200)x 的两处谱线特征。从多普勒效应的角度考虑，下列科学目标中较难以由该设备实现的是（ ）",
-                    options: ["A. 测定星系团的维里质量", "B. 测定星系的旋转曲线", "C. 测定遥远天体的红移", "D. 解析类星体的宽发射线"],
-                    answer: "C",
-                    explanation: "R~200的分辨率难以测定遥远天体的红移，因为需要更高的分辨率"
-                }
-            ]
+        // ==================== 题库数据存储 ====================
+        let questionBank = {
+            stars: [],
+            constellations: [],
+            planets: [],
+            units: [],
+            spacecraft: []
         };
 
         // ==================== 初始化 ====================
@@ -1139,7 +876,6 @@
             let html = `<h3>${category.icon} ${category.name}</h3>`;
             
             category.content.forEach((item, index) => {
-                const count = questionBank[categoryKey] ? questionBank[categoryKey].length : 0;
                 html += `
                     <div class="knowledge-item">
                         <h5>${item.title}</h5>
@@ -1147,13 +883,31 @@
                         ${item.details}
                         <div class="related-questions">
                             <strong>📝 相关题目：</strong> 
-                            <span>${count} 道题目</span>
+                            <span id="question-count-${categoryKey}-${index}">加载中...</span>
                         </div>
                     </div>
                 `;
             });
             
+            // 添加题库导入提示
+            html += `
+                <div class="import-section" style="margin-top: 30px;">
+                    <h4>💡 提示</h4>
+                    <p>导入题库后，相关题目数量会在这里显示。请前往"题库"菜单导入题库文件。</p>
+                </div>
+            `;
+            
             contentArea.innerHTML = html;
+            updateRelatedQuestionsCount(categoryKey);
+        }
+
+        // ==================== 更新相关题目计数 ====================
+        function updateRelatedQuestionsCount(categoryKey) {
+            const count = questionBank[categoryKey] ? questionBank[categoryKey].length : 0;
+            const elements = document.querySelectorAll(`[id^="question-count-${categoryKey}"]`);
+            elements.forEach(el => {
+                el.textContent = count > 0 ? `${count} 道题目` : '暂无题目';
+            });
         }
 
         // ==================== 搜索功能 ====================
@@ -1212,40 +966,56 @@
                 initializeLibrary();
             } else if (menuId === 'questionMenu') {
                 renderQuestionCategories();
-                updateStats();
             }
         }
 
-        // ==================== 更新统计信息 ====================
-        function updateStats() {
-            const container = document.getElementById('statsContainer');
-            const totalQuestions = Object.values(questionBank).reduce((sum, arr) => sum + arr.length, 0);
+        // ==================== 题库导入 ====================
+        function importQuestionBank() {
+            const fileInput = document.getElementById('questionImportInput');
+            const file = fileInput.files[0];
             
-            const categoryNames = {
-                stars: '⭐ 恒星知识',
-                constellations: '🌌 星座与黄道',
-                planets: '🪐 行星与天体',
-                units: '📏 天文单位与换算',
-                spacecraft: '🛸 航天器与探测'
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    // 重置题库
+                    questionBank = {
+                        stars: [],
+                        constellations: [],
+                        planets: [],
+                        units: [],
+                        spacecraft: []
+                    };
+                    
+                    // 导入题目
+                    if (Array.isArray(data)) {
+                        data.forEach(question => {
+                            const category = question.category || 'stars';
+                            if (questionBank[category]) {
+                                questionBank[category].push(question);
+                            }
+                        });
+                    }
+                    
+                    alert(`✅ 题库导入成功！共导入 ${data.length} 道题目`);
+                    renderQuestionCategories();
+                    
+                    // 更新知识点库中的题目计数
+                    Object.keys(questionBank).forEach(key => {
+                        updateRelatedQuestionsCount(key);
+                    });
+                    
+                } catch (error) {
+                    alert('❌ 导入失败：' + error.message);
+                }
             };
+            reader.readAsText(file);
             
-            let html = `
-                <div class="stat-card">
-                    <h4>总题数</h4>
-                    <div class="number">${totalQuestions}</div>
-                </div>
-            `;
-            
-            Object.entries(questionBank).forEach(([key, questions]) => {
-                html += `
-                    <div class="stat-card">
-                        <h4>${categoryNames[key]}</h4>
-                        <div class="number">${questions.length}</div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
+            // 重置文件输入
+            fileInput.value = '';
         }
 
         // ==================== 题库分类显示 ====================
@@ -1255,9 +1025,9 @@
             
             const categoryNames = {
                 stars: '⭐ 恒星知识',
-                constellations: '🌌 星座与黄道',
-                planets: '🪐 行星与天体',
-                units: '📏 天文单位与换算',
+                constellations: '🌌 星座',
+                planets: '🪐 行星与其他天体',
+                units: '📏 天文单位换算与计算',
                 spacecraft: '🛸 航天器与探测'
             };
             
@@ -1269,28 +1039,14 @@
                 `;
                 
                 if (questions.length === 0) {
-                    html += '<div class="empty-state">暂无题目</div>';
+                    html += '<div class="empty-state">暂无题目，请导入题库</div>';
                 } else {
                     html += '<div class="question-list">';
                     questions.forEach((q, index) => {
                         html += `
-                            <div class="question-item" onclick="toggleQuestionDetail(this, ${index}, '${key}')">
-                                <strong>第 ${index + 1} 题：${q.question}</strong>
-                                <p>答案：${q.answer}</p>
-                            </div>
-                            <div class="question-detail" id="detail-${key}-${index}" style="display:none;">
-                                <h4>${q.question}</h4>
-                                <div class="question-options">
-                                    ${q.options.map((opt, i) => `
-                                        <div class="option" onclick="selectOption(this, '${q.answer}', '${opt.charAt(0)}')">
-                                            ${opt}
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                <div class="answer-section">
-                                    <strong>✓ 正确答案：${q.answer}</strong>
-                                    <p>${q.explanation}</p>
-                                </div>
+                            <div class="question-item">
+                                <strong>第 ${index + 1} 题：${q.question || '题目'}</strong>
+                                <p>答案：${q.answer || '未设置'}</p>
                             </div>
                         `;
                     });
@@ -1300,47 +1056,6 @@
                 html += '</div>';
                 container.innerHTML += html;
             });
-        }
-
-        // ==================== 切换题目详情 ====================
-        function toggleQuestionDetail(element, index, category) {
-            const detailId = `detail-${category}-${index}`;
-            const detailElement = document.getElementById(detailId);
-            
-            // 关闭其他打开的详情
-            document.querySelectorAll('.question-detail').forEach(el => {
-                if (el.id !== detailId) {
-                    el.style.display = 'none';
-                }
-            });
-            
-            // 切换当前详情
-            if (detailElement.style.display === 'none') {
-                detailElement.style.display = 'block';
-            } else {
-                detailElement.style.display = 'none';
-            }
-        }
-
-        // ==================== 选择选项 ====================
-        function selectOption(element, correctAnswer, selectedAnswer) {
-            // 移除之前的选择状态
-            element.parentElement.querySelectorAll('.option').forEach(opt => {
-                opt.classList.remove('selected', 'correct', 'incorrect');
-            });
-            
-            // 添加选择状态
-            if (selectedAnswer === correctAnswer) {
-                element.classList.add('selected', 'correct');
-            } else {
-                element.classList.add('selected', 'incorrect');
-                // 显示正确答案
-                element.parentElement.querySelectorAll('.option').forEach(opt => {
-                    if (opt.textContent.charAt(0) === correctAnswer) {
-                        opt.classList.add('correct');
-                    }
-                });
-            }
         }
 
         // ==================== 页面加载 ====================
