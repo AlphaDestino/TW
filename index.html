@@ -336,6 +336,399 @@
             padding: 30px;
             font-size: 16px;
         }
+
+        /* ========== 难度选择界面 ========== */
+        .difficulty-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .difficulty-card {
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.2) 0%, rgba(66, 165, 245, 0.1) 100%);
+            border: 2px solid #64b5f6;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .difficulty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
+            border-color: #90caf9;
+        }
+
+        .difficulty-card.easy {
+            border-color: #4caf50;
+        }
+
+        .difficulty-card.easy:hover {
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .difficulty-card.medium {
+            border-color: #ff9800;
+        }
+
+        .difficulty-card.medium:hover {
+            box-shadow: 0 0 20px rgba(255, 152, 0, 0.5);
+        }
+
+        .difficulty-card.hard {
+            border-color: #f44336;
+        }
+
+        .difficulty-card.hard:hover {
+            box-shadow: 0 0 20px rgba(244, 67, 54, 0.5);
+        }
+
+        .difficulty-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .difficulty-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #64b5f6;
+        }
+
+        .difficulty-card.easy .difficulty-name {
+            color: #4caf50;
+        }
+
+        .difficulty-card.medium .difficulty-name {
+            color: #ff9800;
+        }
+
+        .difficulty-card.hard .difficulty-name {
+            color: #f44336;
+        }
+
+        .difficulty-count {
+            font-size: 14px;
+            color: #90caf9;
+            margin-top: 10px;
+        }
+
+        /* ========== 答题界面 ========== */
+        .quiz-container {
+            background-color: rgba(30, 60, 114, 0.3);
+            border: 2px solid #64b5f6;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #64b5f6;
+        }
+
+        .quiz-progress {
+            font-size: 16px;
+            color: #90caf9;
+        }
+
+        .quiz-difficulty {
+            font-size: 16px;
+            font-weight: bold;
+            color: #64b5f6;
+        }
+
+        .quiz-difficulty.easy {
+            color: #4caf50;
+        }
+
+        .quiz-difficulty.medium {
+            color: #ff9800;
+        }
+
+        .quiz-difficulty.hard {
+            color: #f44336;
+        }
+
+        .question-number {
+            font-size: 14px;
+            color: #90caf9;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #64b5f6;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background-color: rgba(100, 181, 246, 0.1);
+            border: 2px solid #64b5f6;
+            border-radius: 8px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            color: white;
+        }
+
+        .option:hover {
+            background-color: rgba(100, 181, 246, 0.2);
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background-color: rgba(100, 181, 246, 0.4);
+            border-color: #90caf9;
+            box-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+        }
+
+        .option.correct {
+            background-color: rgba(76, 175, 80, 0.3);
+            border-color: #4caf50;
+            color: #81c784;
+        }
+
+        .option.incorrect {
+            background-color: rgba(244, 67, 54, 0.3);
+            border-color: #f44336;
+            color: #ef5350;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .answer-feedback {
+            background-color: rgba(30, 60, 114, 0.5);
+            border-left: 4px solid #64b5f6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .answer-feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #64b5f6;
+        }
+
+        .feedback-title.correct {
+            color: #4caf50;
+        }
+
+        .feedback-title.incorrect {
+            color: #f44336;
+        }
+
+        .feedback-content {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #90caf9;
+        }
+
+        .feedback-content strong {
+            color: #64b5f6;
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .quiz-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #64b5f6;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .quiz-btn:hover {
+            box-shadow: 0 0 15px rgba(100, 181, 246, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-btn.next {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+        }
+
+        .quiz-btn.finish {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            border-color: #81c784;
+        }
+
+        .quiz-btn.finish:hover {
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+        }
+
+        /* ========== 答题结果界面 ========== */
+        .quiz-result {
+            background-color: rgba(30, 60, 114, 0.3);
+            border: 2px solid #64b5f6;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #64b5f6;
+        }
+
+        .result-title.excellent {
+            color: #4caf50;
+        }
+
+        .result-title.good {
+            color: #ff9800;
+        }
+
+        .result-title.poor {
+            color: #f44336;
+        }
+
+        .result-score {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #64b5f6;
+        }
+
+        .result-score.excellent {
+            color: #4caf50;
+        }
+
+        .result-score.good {
+            color: #ff9800;
+        }
+
+        .result-score.poor {
+            color: #f44336;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            background-color: rgba(100, 181, 246, 0.1);
+            border: 2px solid #64b5f6;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #90caf9;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #64b5f6;
+        }
+
+        .result-message {
+            font-size: 18px;
+            color: #90caf9;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .result-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .result-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #64b5f6;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .result-btn:hover {
+            box-shadow: 0 0 15px rgba(100, 181, 246, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .result-btn.again {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            border-color: #ffb74d;
+        }
+
+        .result-btn.again:hover {
+            box-shadow: 0 0 15px rgba(255, 152, 0, 0.6);
+        }
+
+        .result-btn.menu {
+            background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
+            border-color: #ef5350;
+        }
+
+        .result-btn.menu:hover {
+            box-shadow: 0 0 15px rgba(239, 83, 80, 0.6);
+        }
     </style>
 </head>
 <body>
@@ -387,14 +780,95 @@
                 <button class="import-btn" onclick="document.getElementById('questionImportInput').click()">选择文件导入</button>
                 <input type="file" id="questionImportInput" accept=".json" onchange="importQuestionBank()">
                 <p style="margin-top: 15px; font-size: 12px; color: #90caf9;">
-                    提示：JSON 格式应包含 category（分类）、question（题目）、options（选项）、answer（答案）等字段
+                    提示：JSON 格式应包含 category（分类）、question（题目）、options（选项）、answer（答案）、difficulty（难度）等字段
                 </p>
             </div>
             
+            <!-- 难度选择界面 -->
+            <div id="difficultySelector" style="display: none;">
+                <h3 style="text-align: center; margin: 30px 0;">选择难度等级开始答题</h3>
+                <div class="difficulty-selector">
+                    <div class="difficulty-card easy" onclick="startQuiz('easy')">
+                        <div class="difficulty-icon">🟢</div>
+                        <div class="difficulty-name">低难度</div>
+                        <div class="difficulty-count" id="easyCount">0 道题</div>
+                    </div>
+                    <div class="difficulty-card medium" onclick="startQuiz('medium')">
+                        <div class="difficulty-icon">🟡</div>
+                        <div class="difficulty-name">中难度</div>
+                        <div class="difficulty-count" id="mediumCount">0 道题</div>
+                    </div>
+                    <div class="difficulty-card hard" onclick="startQuiz('hard')">
+                        <div class="difficulty-icon">🔴</div>
+                        <div class="difficulty-name">高难度</div>
+                        <div class="difficulty-count" id="hardCount">0 道题</div>
+                    </div>
+                </div>
+                <button class="return-btn" onclick="showMenu('questionMenu')">← 返回</button>
+            </div>
+
             <!-- 题库分类显示 -->
-            <div id="questionCategoriesContainer" style="margin-top: 30px;"></div>
+            <div id="questionCategoriesContainer"></div>
             
             <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
+        </div>
+
+        <!-- 答题界面 -->
+        <div id="quizMenu" class="menu">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <div class="quiz-progress">
+                        第 <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span> 题
+                    </div>
+                    <div class="quiz-difficulty" id="difficultyDisplay"></div>
+                </div>
+
+                <div class="question-number" id="questionNumber"></div>
+                <div class="question-text" id="questionText"></div>
+
+                <div class="options-container" id="optionsContainer"></div>
+
+                <div class="answer-feedback" id="answerFeedback">
+                    <div class="feedback-title" id="feedbackTitle"></div>
+                    <div class="feedback-content" id="feedbackContent"></div>
+                </div>
+
+                <div class="quiz-buttons">
+                    <button class="quiz-btn" id="submitBtn" onclick="submitAnswer()">提交答案</button>
+                    <button class="quiz-btn next" id="nextBtn" onclick="nextQuestion()" style="display: none;">下一题</button>
+                    <button class="quiz-btn finish" id="finishBtn" onclick="finishQuiz()" style="display: none;">完成答题</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 答题结果界面 -->
+        <div id="resultMenu" class="menu">
+            <div class="quiz-result">
+                <div class="result-title" id="resultTitle"></div>
+                <div class="result-score" id="resultScore"></div>
+                
+                <div class="result-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">正确题数</div>
+                        <div class="stat-value" id="correctCount">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">错误题数</div>
+                        <div class="stat-value" id="wrongCount">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">正确率</div>
+                        <div class="stat-value" id="correctRate">0%</div>
+                    </div>
+                </div>
+
+                <div class="result-message" id="resultMessage"></div>
+
+                <div class="result-buttons">
+                    <button class="result-btn again" onclick="backToDifficultySelector()">再做一遍</button>
+                    <button class="result-btn menu" onclick="showMenu('mainMenu')">返回主菜单</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -837,6 +1311,17 @@
             spacecraft: []
         };
 
+        // ==================== 答题状态 ====================
+        let quizState = {
+            currentDifficulty: null,
+            currentQuestionIndex: 0,
+            questions: [],
+            userAnswers: [],
+            isAnswered: false,
+            correctCount: 0,
+            wrongCount: 0
+        };
+
         // ==================== 初始化 ====================
         function initializeLibrary() {
             renderCategoryButtons();
@@ -1002,6 +1487,7 @@
                     
                     alert(`✅ 题库导入成功！共导入 ${data.length} 道题目`);
                     renderQuestionCategories();
+                    updateDifficultyCount();
                     
                     // 更新知识点库中的题目计数
                     Object.keys(questionBank).forEach(key => {
@@ -1021,41 +1507,219 @@
         // ==================== 题库分类显示 ====================
         function renderQuestionCategories() {
             const container = document.getElementById('questionCategoriesContainer');
-            container.innerHTML = '';
+            const selector = document.getElementById('difficultySelector');
             
-            const categoryNames = {
-                stars: '⭐ 恒星知识',
-                constellations: '🌌 星座',
-                planets: '🪐 行星与其他天体',
-                units: '📏 天文单位换算与计算',
-                spacecraft: '🛸 航天器与探测'
+            // 检查是否有题目
+            const totalQuestions = Object.values(questionBank).reduce((sum, arr) => sum + arr.length, 0);
+            
+            if (totalQuestions === 0) {
+                container.innerHTML = '<div class="empty-state">暂无题目，请先导入题库</div>';
+                selector.style.display = 'none';
+            } else {
+                container.innerHTML = '';
+                selector.style.display = 'block';
+                updateDifficultyCount();
+            }
+        }
+
+        // ==================== 更新难度计数 ====================
+        function updateDifficultyCount() {
+            const allQuestions = Object.values(questionBank).flat();
+            const easyCount = allQuestions.filter(q => q.difficulty === 'easy').length;
+            const mediumCount = allQuestions.filter(q => q.difficulty === 'medium').length;
+            const hardCount = allQuestions.filter(q => q.difficulty === 'hard').length;
+            
+            document.getElementById('easyCount').textContent = `${easyCount} 道题`;
+            document.getElementById('mediumCount').textContent = `${mediumCount} 道题`;
+            document.getElementById('hardCount').textContent = `${hardCount} 道题`;
+        }
+
+        // ==================== 开始答题 ====================
+        function startQuiz(difficulty) {
+            const allQuestions = Object.values(questionBank).flat();
+            const filteredQuestions = allQuestions.filter(q => q.difficulty === difficulty);
+            
+            if (filteredQuestions.length === 0) {
+                alert('该难度等级暂无题目');
+                return;
+            }
+            
+            // 随机打乱题目
+            quizState.questions = filteredQuestions.sort(() => Math.random() - 0.5);
+            quizState.currentDifficulty = difficulty;
+            quizState.currentQuestionIndex = 0;
+            quizState.userAnswers = [];
+            quizState.isAnswered = false;
+            quizState.correctCount = 0;
+            quizState.wrongCount = 0;
+            
+            // 设置难度显示
+            const difficultyMap = {
+                easy: '低难度',
+                medium: '中难度',
+                hard: '高难度'
             };
             
-            Object.entries(questionBank).forEach(([key, questions]) => {
-                const categoryName = categoryNames[key];
-                let html = `
-                    <div style="margin-bottom: 30px;">
-                        <h3>${categoryName}</h3>
-                `;
-                
-                if (questions.length === 0) {
-                    html += '<div class="empty-state">暂无题目，请导入题库</div>';
-                } else {
-                    html += '<div class="question-list">';
-                    questions.forEach((q, index) => {
-                        html += `
-                            <div class="question-item">
-                                <strong>第 ${index + 1} 题：${q.question || '题目'}</strong>
-                                <p>答案：${q.answer || '未设置'}</p>
-                            </div>
-                        `;
-                    });
-                    html += '</div>';
-                }
-                
-                html += '</div>';
-                container.innerHTML += html;
+            document.getElementById('difficultyDisplay').textContent = difficultyMap[difficulty];
+            document.getElementById('difficultyDisplay').className = `quiz-difficulty ${difficulty}`;
+            document.getElementById('totalQuestions').textContent = quizState.questions.length;
+            
+            showMenu('quizMenu');
+            displayQuestion();
+        }
+
+        // ==================== 显示题目 ====================
+        function displayQuestion() {
+            const question = quizState.questions[quizState.currentQuestionIndex];
+            
+            document.getElementById('currentQuestion').textContent = quizState.currentQuestionIndex + 1;
+            document.getElementById('questionNumber').textContent = `第 ${quizState.currentQuestionIndex + 1} 题`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            // 显示选项
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectOption(index);
+                optionDiv.id = `option-${index}`;
+                optionsContainer.appendChild(optionDiv);
             });
+            
+            // 重置反馈
+            document.getElementById('answerFeedback').classList.remove('show');
+            document.getElementById('submitBtn').style.display = 'block';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('finishBtn').style.display = 'none';
+            
+            quizState.isAnswered = false;
+        }
+
+        // ==================== 选择选项 ====================
+        function selectOption(index) {
+            if (quizState.isAnswered) return;
+            
+            // 移除其他选项的选中状态
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // 选中当前选项
+            document.getElementById(`option-${index}`).classList.add('selected');
+            quizState.userAnswers[quizState.currentQuestionIndex] = index;
+        }
+
+        // ==================== 提交答案 ====================
+        function submitAnswer() {
+            if (quizState.userAnswers[quizState.currentQuestionIndex] === undefined) {
+                alert('请先选择一个答案');
+                return;
+            }
+            
+            const question = quizState.questions[quizState.currentQuestionIndex];
+            const userAnswerIndex = quizState.userAnswers[quizState.currentQuestionIndex];
+            const correctAnswerIndex = question.answer;
+            
+            const isCorrect = userAnswerIndex === correctAnswerIndex;
+            
+            if (isCorrect) {
+                quizState.correctCount++;
+            } else {
+                quizState.wrongCount++;
+            }
+            
+            // 显示反馈
+            const feedback = document.getElementById('answerFeedback');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackContent = document.getElementById('feedbackContent');
+            
+            if (isCorrect) {
+                feedbackTitle.textContent = '✅ 回答正确！';
+                feedbackTitle.className = 'feedback-title correct';
+                feedbackContent.innerHTML = `
+                    <strong>你的答案：</strong> ${question.options[userAnswerIndex]}<br>
+                    <strong>正确答案：</strong> ${question.options[correctAnswerIndex]}<br>
+                    ${question.explanation ? `<strong>解析：</strong> ${question.explanation}` : ''}
+                `;
+            } else {
+                feedbackTitle.textContent = '❌ 回答错误';
+                feedbackTitle.className = 'feedback-title incorrect';
+                feedbackContent.innerHTML = `
+                    <strong>你的答案：</strong> ${question.options[userAnswerIndex]}<br>
+                    <strong>正确答案：</strong> ${question.options[correctAnswerIndex]}<br>
+                    ${question.explanation ? `<strong>解析：</strong> ${question.explanation}` : ''}
+                `;
+            }
+            
+            feedback.classList.add('show');
+            
+            // 显示选项的正确/错误状态
+            document.getElementById(`option-${correctAnswerIndex}`).classList.add('correct');
+            if (!isCorrect) {
+                document.getElementById(`option-${userAnswerIndex}`).classList.add('incorrect');
+            }
+            
+            // 禁用所有选项
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.add('disabled');
+            });
+            
+            // 显示下一题或完成按钮
+            document.getElementById('submitBtn').style.display = 'none';
+            
+            if (quizState.currentQuestionIndex < quizState.questions.length - 1) {
+                document.getElementById('nextBtn').style.display = 'block';
+            } else {
+                document.getElementById('finishBtn').style.display = 'block';
+            }
+            
+            quizState.isAnswered = true;
+        }
+
+        // ==================== 下一题 ====================
+        function nextQuestion() {
+            quizState.currentQuestionIndex++;
+            displayQuestion();
+        }
+
+        // ==================== 完成答题 ====================
+        function finishQuiz() {
+            const totalQuestions = quizState.questions.length;
+            const correctRate = Math.round((quizState.correctCount / totalQuestions) * 100);
+            
+            // 确定评价等级
+            let resultLevel = 'poor';
+            let resultTitle = '继续加油！';
+            let resultMessage = '你的成绩还需要提高，建议复习相关知识点后再试一次。';
+            
+            if (correctRate >= 90) {
+                resultLevel = 'excellent';
+                resultTitle = '🎉 优秀！';
+                resultMessage = '你的表现非常出色，对天文知识的掌握已经很深入了！';
+            } else if (correctRate >= 70) {
+                resultLevel = 'good';
+                resultTitle = '👍 不错！';
+                resultMessage = '你的成绩不错，继续保持并深化对知识的理解。';
+            }
+            
+            document.getElementById('resultTitle').textContent = resultTitle;
+            document.getElementById('resultTitle').className = `result-title ${resultLevel}`;
+            document.getElementById('resultScore').textContent = `${correctRate}%`;
+            document.getElementById('resultScore').className = `result-score ${resultLevel}`;
+            document.getElementById('correctCount').textContent = quizState.correctCount;
+            document.getElementById('wrongCount').textContent = quizState.wrongCount;
+            document.getElementById('correctRate').textContent = `${correctRate}%`;
+            document.getElementById('resultMessage').textContent = resultMessage;
+            
+            showMenu('resultMenu');
+        }
+
+        // ==================== 返回难度选择 ====================
+        function backToDifficultySelector() {
+            showMenu('questionMenu');
         }
 
         // ==================== 页面加载 ====================
@@ -1065,3 +1729,138 @@
     </script>
 </body>
 </html>
+完美！我已经为你生成了完整的更新代码。现在让我为你创建一个 JSON 格式的题库示例文件，这样你就可以直接导入你的题目了：
+
+Dockerfile
+[
+  {
+    "category": "constellations",
+    "question": "01. 今年\"五一\"假日期间的月相是（ ）。",
+    "options": [
+      "(A) 下弦月",
+      "(B) 蛾眉月",
+      "(C) 残月",
+      "(D) 满月"
+    ],
+    "answer": 1,
+    "difficulty": "easy",
+    "explanation": "月相周期：朔（初一，不见月）-蛾眉月（初三前后，日落，西南方，小月牙）-上弦月（初七初八，放学，正南方）-满月（十五前后，太阳落山，东出）-下弦月（廿三前后，0点东出）-残月（月底，出现在黎明东方）。五一假期通常在农历四月，需要查看具体年份的农历日期。"
+  },
+  {
+    "category": "stars",
+    "question": "02. 在最好的观测时机，以下行星在地球上观测最亮的是（ ）。",
+    "options": [
+      "(A) 金星",
+      "(B) 木星",
+      "(C) 火星",
+      "(D) 土星"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "大行星亮度排序：金星：-4.4等，水星：-2.6等，火星：-2.9等，木星：-2.9等，土星：-0.3等。金星是最亮的行星。"
+  },
+  {
+    "category": "stars",
+    "question": "03. 以下恒星目视最暗的是（ ）。",
+    "options": [
+      "(A) 造父一",
+      "(B) 天关",
+      "(C) 辇道增七",
+      "(D) 大陵五"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "造父一是一颗变星，平均星等约4等，是造父变星的\"典型星\"。天关（ζ Tau）视星等：2.88-3.17，辇道增七视星等：3.18，大陵五视星等：2.12等。造父一最暗。"
+  },
+  {
+    "category": "constellations",
+    "question": "04. 第一个通过观测证认出蜂巢星团 M44 中恒星的天文学家是（ ）。",
+    "options": [
+      "(A) 赫维留",
+      "(B) 梅西叶",
+      "(C) 伽利略",
+      "(D) 威廉赫歇尔"
+    ],
+    "answer": 2,
+    "difficulty": "hard",
+    "explanation": "伽利略最早观测鬼星团（M44，@巨蟹座）。伽利略的其他贡献：最早使用天文望远镜；通过太阳黑子发现太阳自转周期；发现木星卫星（伽利略卫星）；通过金星相位变化判定金星围绕太阳公转；发现银河是由无数恒星组成的；发现月球有山脉地形。"
+  },
+  {
+    "category": "constellations",
+    "question": "05. 以下星座中全部适合在北半球冬季观测的是（ ）。",
+    "options": [
+      "(A) 猎户座、御夫座、天龙座、半人马座",
+      "(B) 双子座、武仙座、猎犬座、大犬座",
+      "(C) 双子座、猎户座、大犬座、豺狼座",
+      "(D) 双子座、御夫座、猎户座、天兔座"
+    ],
+    "answer": 3,
+    "difficulty": "medium",
+    "explanation": "北半球冬季（12月-2月）主要星座：双子座、猎户座、大犬座、小犬座、御夫座、天兔座等。半人马座在南半球可见。武仙座在夏季观测。天龙座全年可见但不是冬季主要星座。"
+  },
+  {
+    "category": "planets",
+    "question": "06. 太阳系中最大的行星是（ ）。",
+    "options": [
+      "(A) 土星",
+      "(B) 木星",
+      "(C) 天王星",
+      "(D) 海王星"
+    ],
+    "answer": 1,
+    "difficulty": "easy",
+    "explanation": "木星是太阳系中最大的行星，其直径约为地球的11倍，质量约为地球的318倍。"
+  },
+  {
+    "category": "planets",
+    "question": "07. 火星有几个卫星？",
+    "options": [
+      "(A) 1个",
+      "(B) 2个",
+      "(C) 3个",
+      "(D) 4个"
+    ],
+    "answer": 1,
+    "difficulty": "easy",
+    "explanation": "火星有两个卫星：火卫一（Phobos）和火卫二（Deimos）。"
+  },
+  {
+    "category": "units",
+    "question": "08. 1光年等于多少秒差距？",
+    "options": [
+      "(A) 0.3 pc",
+      "(B) 3.26 pc",
+      "(C) 1 pc",
+      "(D) 10 pc"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "1秒差距（pc）= 3.26光年，所以1光年 ≈ 0.3秒差距。"
+  },
+  {
+    "category": "spacecraft",
+    "question": "09. 中国首个月球探测器是（ ）。",
+    "options": [
+      "(A) 嫦娥一号",
+      "(B) 嫦娥二号",
+      "(C) 嫦娥三号",
+      "(D) 嫦娥四号"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "嫦娥一号是中国首个月球探测器，于2007年10月24日发射。"
+  },
+  {
+    "category": "spacecraft",
+    "question": "10. 中国首个火星探测器是（ ）。",
+    "options": [
+      "(A) 天问一号",
+      "(B) 祝融号",
+      "(C) 火星一号",
+      "(D) 探火号"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "天问一号是中国首个火星探测器，于2020年7月23日发射。祝融号是天问一号的火星车。"
+  }
+]
