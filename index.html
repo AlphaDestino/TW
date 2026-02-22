@@ -1512,7 +1512,7 @@
             const count = questionBank[categoryKey] ? questionBank[categoryKey].length : 0;
             const elements = document.querySelectorAll(`[id^="question-count-${categoryKey}"]`);
             elements.forEach(el => {
-                el.innerHTML = count > 0 ? `<a onclick="startCategoryQuiz('${categoryKey}')">${count} 道题 → 开始答题</a>` : '暂无题目';
+                el.textContent = count > 0 ? `<a onclick="startCategoryQuiz('${categoryKey}')">${count} 道题 → 开始答题</a>` : '暂无题目';
             });
         }
 
@@ -1548,7 +1548,7 @@
                 let html = '';
                 results.forEach(result => {
                     html += `
-                        <div class="search-result-item" onclick="showCategory('${result.categoryKey}', null)">
+                        <div class="search-result-item" onclick="showCategory('${result.categoryKey}')">
                             <strong>${result.title}</strong>
                             <div class="search-result-category">${result.category}</div>
                         </div>
