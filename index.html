@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Menu</title>
+    <title>天文知识库与题库系统</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,7 @@
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -30,6 +30,12 @@
             margin-bottom: 30px;
             color: #64b5f6;
             text-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+        }
+        
+        h3 {
+            color: #64b5f6;
+            margin-bottom: 15px;
+            font-size: 18px;
         }
         
         .menu-buttons {
@@ -81,13 +87,6 @@
             }
         }
         
-        .submenu-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
         .search-container {
             margin-bottom: 20px;
             display: flex;
@@ -122,7 +121,7 @@
             padding: 15px;
             margin-bottom: 20px;
             display: none;
-            max-height: 200px;
+            max-height: 250px;
             overflow-y: auto;
         }
         
@@ -149,10 +148,36 @@
             color: #64b5f6;
         }
         
+        .search-result-category {
+            font-size: 12px;
+            color: #90caf9;
+            margin-top: 3px;
+        }
+        
         .no-results {
             text-align: center;
             color: #90caf9;
             padding: 10px;
+        }
+        
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .category-btn {
+            padding: 12px 15px;
+            font-size: 14px;
+            background: linear-gradient(135deg, #1a3a52 0%, #1e5a96 100%);
+            border: 2px solid #42a5f5;
+        }
+        
+        .category-btn.active {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            border-color: #64b5f6;
+            box-shadow: 0 0 15px rgba(100, 181, 246, 0.6);
         }
         
         .content-area {
@@ -161,7 +186,7 @@
             border-radius: 8px;
             padding: 20px;
             margin-top: 20px;
-            min-height: 300px;
+            min-height: 400px;
         }
         
         .content-page {
@@ -173,15 +198,10 @@
             animation: fadeIn 0.3s ease;
         }
         
-        .content-page h3 {
-            color: #64b5f6;
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-        
         .content-page h4 {
             color: #90caf9;
             margin-top: 15px;
+            margin-bottom: 10px;
         }
         
         .content-page p, .content-page ul, .content-page table {
@@ -214,6 +234,66 @@
             color: #64b5f6;
         }
         
+        .knowledge-item {
+            background-color: rgba(100, 181, 246, 0.1);
+            border-left: 4px solid #64b5f6;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        .knowledge-item h5 {
+            color: #64b5f6;
+            margin-bottom: 8px;
+        }
+        
+        .knowledge-item p {
+            margin-bottom: 8px;
+        }
+        
+        .related-questions {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #81c784;
+        }
+        
+        .related-questions strong {
+            color: #4caf50;
+        }
+        
+        .import-section {
+            background-color: rgba(255, 152, 0, 0.1);
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .import-section h4 {
+            color: #ffb74d;
+            margin-bottom: 15px;
+        }
+        
+        .import-btn {
+            background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%);
+            border-color: #ffb74d;
+            padding: 12px 30px;
+            font-size: 16px;
+        }
+        
+        .import-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 152, 0, 0.6);
+        }
+        
+        #questionImportInput {
+            display: none;
+        }
+        
         .return-btn {
             background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
             border-color: #ef5350;
@@ -223,17 +303,49 @@
         .return-btn:hover {
             box-shadow: 0 0 15px rgba(239, 83, 80, 0.6);
         }
+        
+        .question-list {
+            background-color: rgba(30, 60, 114, 0.3);
+            border: 2px solid #64b5f6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .question-item {
+            background-color: rgba(100, 181, 246, 0.1);
+            border-left: 3px solid #64b5f6;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        
+        .question-item strong {
+            color: #64b5f6;
+        }
+        
+        .question-item p {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #90caf9;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #90caf9;
+            padding: 30px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- 主菜单 -->
         <div id="mainMenu" class="menu active">
-            <h1>🌟 天文知识库 🌟</h1>
+            <h1>🌟 天文知识库与题库系统 🌟</h1>
             <div class="menu-buttons">
                 <button onclick="showMenu('libMenu')">📚 知识点库</button>
                 <button onclick="showMenu('questionMenu')">❓ 题库</button>
-                <button onclick="showMenu('errorMenu')">⚠️ 个性化易错题库</button>
             </div>
         </div>
 
@@ -247,7 +359,7 @@
                     type="text" 
                     class="search-input" 
                     id="searchInput" 
-                    placeholder="输入关键词搜索知识点（如：星座、航天器、换算等）"
+                    placeholder="输入关键词搜索知识点（如：恒星、行星、星座、航天器等）"
                     oninput="searchKnowledgePoints()"
                 >
             </div>
@@ -255,344 +367,11 @@
             <!-- 搜索结果 -->
             <div class="search-results" id="searchResults"></div>
             
-            <div class="submenu-buttons">
-                <button onclick="showContent('brightStars')">全天五十亮星表</button>
-                <button onclick="showContent('zodiac')">黄道十二宫表</button>
-                <button onclick="showContent('conversion')">换算</button>
-                <button onclick="showContent('domesticSpacecraft')">国内航天器</button>
-                <button onclick="showContent('internationalSpacecraft')">国际航天器</button>
-                <button onclick="showContent('betaAlpha')">β星比α星亮的星座</button>
-            </div>
+            <!-- 分类按钮 -->
+            <div class="category-buttons" id="categoryButtons"></div>
             
-            <div class="content-area">
-                <!-- 全天五十亮星表 -->
-                <div id="brightStars" class="content-page active">
-                    <h3>全天五十亮星表</h3>
-                    <p>全天最亮的50颗恒星按视星等排列：</p>
-                    <table>
-                        <tr>
-                            <th>排名</th>
-                            <th>星名</th>
-                            <th>视星等</th>
-                            <th>所在星座</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>天狼星</td>
-                            <td>-1.46</td>
-                            <td>大犬座</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>老人星</td>
-                            <td>-0.72</td>
-                            <td>船底座</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>南门二</td>
-                            <td>-0.27</td>
-                            <td>半人马座</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>大角星</td>
-                            <td>-0.04</td>
-                            <td>牧夫座</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>织女星</td>
-                            <td>0.03</td>
-                            <td>琴座</td>
-                        </tr>
-                    </table>
-                    <p style="margin-top: 15px; font-size: 12px; color: #90caf9;">注：表格仅显示前5颗，完整表格包含全天50颗最亮恒星</p>
-                </div>
-
-                <!-- 黄道十二宫表 -->
-                <div id="zodiac" class="content-page">
-                    <h3>黄道十二宫表</h3>
-                    <p>黄道十二宫是太阳在黄道上运行一年所经过的12个星座：</p>
-                    <table>
-                        <tr>
-                            <th>宫名</th>
-                            <th>对应星座</th>
-                            <th>太阳进入日期</th>
-                            <th>太阳离开日期</th>
-                        </tr>
-                        <tr>
-                            <td>白羊宫</td>
-                            <td>白羊座</td>
-                            <td>3月21日</td>
-                            <td>4月19日</td>
-                        </tr>
-                        <tr>
-                            <td>金牛宫</td>
-                            <td>金牛座</td>
-                            <td>4月20日</td>
-                            <td>5月20日</td>
-                        </tr>
-                        <tr>
-                            <td>双子宫</td>
-                            <td>双子座</td>
-                            <td>5月21日</td>
-                            <td>6月20日</td>
-                        </tr>
-                        <tr>
-                            <td>巨蟹宫</td>
-                            <td>巨蟹座</td>
-                            <td>6月21日</td>
-                            <td>7月22日</td>
-                        </tr>
-                        <tr>
-                            <td>狮子宫</td>
-                            <td>狮子座</td>
-                            <td>7月23日</td>
-                            <td>8月22日</td>
-                        </tr>
-                        <tr>
-                            <td>处女宫</td>
-                            <td>处女座</td>
-                            <td>8月23日</td>
-                            <td>9月22日</td>
-                        </tr>
-                        <tr>
-                            <td>天秤宫</td>
-                            <td>天秤座</td>
-                            <td>9月23日</td>
-                            <td>10月22日</td>
-                        </tr>
-                        <tr>
-                            <td>天蝎宫</td>
-                            <td>天蝎座</td>
-                            <td>10月23日</td>
-                            <td>11月21日</td>
-                        </tr>
-                        <tr>
-                            <td>射手宫</td>
-                            <td>射手座</td>
-                            <td>11月22日</td>
-                            <td>12月21日</td>
-                        </tr>
-                        <tr>
-                            <td>摩羯宫</td>
-                            <td>摩羯座</td>
-                            <td>12月22日</td>
-                            <td>1月19日</td>
-                        </tr>
-                        <tr>
-                            <td>水瓶宫</td>
-                            <td>水瓶座</td>
-                            <td>1月20日</td>
-                            <td>2月18日</td>
-                        </tr>
-                        <tr>
-                            <td>双鱼宫</td>
-                            <td>双鱼座</td>
-                            <td>2月19日</td>
-                            <td>3月20日</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- 换算 -->
-                <div id="conversion" class="content-page">
-                    <h3>天文单位换算</h3>
-                    <h4>距离单位换算</h4>
-                    <ul>
-                        <li><strong>1 天文单位 (AU)</strong> = 1.496 × 10¹¹ 米</li>
-                        <li><strong>1 光年 (ly)</strong> = 9.461 × 10¹⁵ 米</li>
-                        <li><strong>1 秒差距 (pc)</strong> = 3.086 × 10¹⁶ 米 = 3.26 光年</li>
-                        <li><strong>1 AU</strong> ≈ 1.5 亿公里</li>
-                    </ul>
-                    
-                    <h4>角度单位换算</h4>
-                    <ul>
-                        <li><strong>1 度 (°)</strong> = 60 分 (′) = 3600 秒 (″)</li>
-                        <li><strong>1 弧分 (′)</strong> = 60 弧秒 (″)</li>
-                        <li><strong>1 弧度 (rad)</strong> = 57.3°</li>
-                    </ul>
-                    
-                    <h4>亮度单位换算</h4>
-                    <ul>
-                        <li><strong>视星等差 1</strong> = 亮度比 2.512 倍</li>
-                        <li><strong>视星等差 5</strong> = 亮度比 100 倍</li>
-                        <li><strong>绝对星等</strong> = 视星等 + 5 - 5lg(距离/pc)</li>
-                    </ul>
-                </div>
-
-                <!-- 国内航天器 -->
-                <div id="domesticSpacecraft" class="content-page">
-                    <h3>国内航天器</h3>
-                    <p>中国主要航天器及卫星项目：</p>
-                    <table>
-                        <tr>
-                            <th>名称</th>
-                            <th>类型</th>
-                            <th>发射时间</th>
-                            <th>用途</th>
-                        </tr>
-                        <tr>
-                            <td>神舟系列</td>
-                            <td>载人飞船</td>
-                            <td>1999年-至今</td>
-                            <td>载人航天</td>
-                        </tr>
-                        <tr>
-                            <td>天宫系列</td>
-                            <td>空间站</td>
-                            <td>2011年-至今</td>
-                            <td>空间科学实验</td>
-                        </tr>
-                        <tr>
-                            <td>天舟系列</td>
-                            <td>货运飞船</td>
-                            <td>2017年-至今</td>
-                            <td>空间站补给</td>
-                        </tr>
-                        <tr>
-                            <td>北斗导航卫星</td>
-                            <td>导航卫星</td>
-                            <td>2000年-至今</td>
-                            <td>导航定位</td>
-                        </tr>
-                        <tr>
-                            <td>嫦娥系列</td>
-                            <td>月球探测器</td>
-                            <td>2007年-至今</td>
-                            <td>月球探测</td>
-                        </tr>
-                        <tr>
-                            <td>祝融号</td>
-                            <td>火星探测器</td>
-                            <td>2021年</td>
-                            <td>火星探测</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- 国际航天器 -->
-                <div id="internationalSpacecraft" class="content-page">
-                    <h3>国际航天器</h3>
-                    <p>主要国际航天器及卫星项目：</p>
-                    <table>
-                        <tr>
-                            <th>名称</th>
-                            <th>国家/组织</th>
-                            <th>类型</th>
-                            <th>用途</th>
-                        </tr>
-                        <tr>
-                            <td>国际空间站 (ISS)</td>
-                            <td>多国合作</td>
-                            <td>空间站</td>
-                            <td>科学研究</td>
-                        </tr>
-                        <tr>
-                            <td>哈勃太空望远镜</td>
-                            <td>美国/欧洲</td>
-                            <td>空间望远镜</td>
-                            <td>天文观测</td>
-                        </tr>
-                        <tr>
-                            <td>詹姆斯·韦伯太空望远镜</td>
-                            <td>美国/欧洲/加拿大</td>
-                            <td>空间望远镜</td>
-                            <td>深空观测</td>
-                        </tr>
-                        <tr>
-                            <td>GPS卫星</td>
-                            <td>美国</td>
-                            <td>导航卫星</td>
-                            <td>导航定位</td>
-                        </tr>
-                        <tr>
-                            <td>伽利略卫星系统</td>
-                            <td>欧洲</td>
-                            <td>导航卫星</td>
-                            <td>导航定位</td>
-                        </tr>
-                        <tr>
-                            <td>火星探测器 (Perseverance)</td>
-                            <td>美国</td>
-                            <td>火星探测器</td>
-                            <td>火星探测</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- β星比α星亮的星座 -->
-                <div id="betaAlpha" class="content-page">
-                    <h3>β星比α星亮的星座列表</h3>
-                    <p>在某些星座中，β星的亮度比α星更亮，这些星座包括：</p>
-                    <table>
-                        <tr>
-                            <th>星座</th>
-                            <th>α星</th>
-                            <th>α星视星等</th>
-                            <th>β星</th>
-                            <th>β星视星等</th>
-                        </tr>
-                        <tr>
-                            <td>金牛座</td>
-                            <td>毕宿五</td>
-                            <td>0.85</td>
-                            <td>毕宿二</td>
-                            <td>1.65</td>
-                        </tr>
-                        <tr>
-                            <td>巨蟹座</td>
-                            <td>北极星增四</td>
-                            <td>4.26</td>
-                            <td>鬼宿</td>
-                            <td>3.52</td>
-                        </tr>
-                        <tr>
-                            <td>狮子座</td>
-                            <td>轩辕十四</td>
-                            <td>1.35</td>
-                            <td>五帝座一</td>
-                            <td>1.44</td>
-                        </tr>
-                        <tr>
-                            <td>处女座</td>
-                            <td>角宿一</td>
-                            <td>0.98</td>
-                            <td>角宿二</td>
-                            <td>1.84</td>
-                        </tr>
-                        <tr>
-                            <td>天蝎座</td>
-                            <td>心宿二</td>
-                            <td>0.96</td>
-                            <td>心宿增十</td>
-                            <td>1.91</td>
-                        </tr>
-                        <tr>
-                            <td>射手座</td>
-                            <td>斗宿一</td>
-                            <td>2.59</td>
-                            <td>斗宿二</td>
-                            <td>1.83</td>
-                        </tr>
-                        <tr>
-                            <td>摩羯座</td>
-                            <td>垒壁阵一</td>
-                            <td>3.57</td>
-                            <td>垒壁阵二</td>
-                            <td>3.03</td>
-                        </tr>
-                        <tr>
-                            <td>双鱼座</td>
-                            <td>右更一</td>
-                            <td>3.82</td>
-                            <td>右更二</td>
-                            <td>2.04</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            <!-- 内容区域 -->
+            <div class="content-area" id="contentArea"></div>
             
             <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
         </div>
@@ -600,70 +379,538 @@
         <!-- 题库菜单 -->
         <div id="questionMenu" class="menu">
             <h2>❓ 题库</h2>
-            <div class="submenu-buttons">
-                <button onclick="selectDifficulty('beginner')">初学者</button>
-                <button onclick="selectDifficulty('intermediate')">中等水平</button>
-                <button onclick="selectDifficulty('advanced')">高水平</button>
+            
+            <!-- 题库导入区域 -->
+            <div class="import-section">
+                <h4>📥 导入题库</h4>
+                <p style="margin-bottom: 15px; color: #ffb74d;">支持 JSON 格式的题库文件导入</p>
+                <button class="import-btn" onclick="document.getElementById('questionImportInput').click()">选择文件导入</button>
+                <input type="file" id="questionImportInput" accept=".json" onchange="importQuestionBank()">
+                <p style="margin-top: 15px; font-size: 12px; color: #90caf9;">
+                    提示：JSON 格式应包含 category（分类）、question（题目）、options（选项）、answer（答案）等字段
+                </p>
             </div>
-            <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
-        </div>
-
-        <!-- 个性化易错题库菜单 -->
-        <div id="errorMenu" class="menu">
-            <h2>⚠️ 个性化易错题库</h2>
-            <p style="text-align: center; margin-top: 30px; font-size: 18px;">功能开发中...</p>
+            
+            <!-- 题库分类显示 -->
+            <div id="questionCategoriesContainer" style="margin-top: 30px;"></div>
+            
             <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
         </div>
     </div>
 
     <script>
-        // 知识点数据库
-        const knowledgePoints = [
-            { id: 'brightStars', title: '全天五十亮星表', keywords: ['亮星', '恒星', '视星等', '天狼星', '老人星', '南门二', '大角星', '织女星'] },
-            { id: 'zodiac', title: '黄道十二宫表', keywords: ['黄道', '十二宫', '星座', '白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯', '水瓶', '双鱼'] },
-            { id: 'conversion', title: '天文单位换算', keywords: ['换算', '单位', '天文单位', '光年', '秒差距', '角度', '亮度', '距离'] },
-            { id: 'domesticSpacecraft', title: '国内航天器', keywords: ['航天器', '国内', '神舟', '天宫', '天舟', '北斗', '嫦娥', '祝融', '飞船', '卫星', '探测器'] },
-            { id: 'internationalSpacecraft', title: '国际航天器', keywords: ['航天器', '国际', '空间站', '望远镜', '哈勃', '韦伯', 'GPS', '伽利略', '火星', '探测器'] },
-            { id: 'betaAlpha', title: 'β星比α星亮的星座', keywords: ['星座', 'β星', 'α星', '亮度', '金牛', '巨蟹', '狮子', '处女', '天蝎', '射手', '摩羯', '双鱼'] }
-        ];
-
-        function showMenu(menuId) {
-            // 隐藏所有菜单
-            const menus = document.querySelectorAll('.menu');
-            menus.forEach(menu => menu.classList.remove('active'));
+        // ==================== 知识点库数据 ====================
+        const knowledgeCategories = {
+            stars: {
+                name: '⭐ 恒星知识',
+                icon: '⭐',
+                keywords: ['恒星', '亮星', '天狼星', '老人星', '南门二', '大角星', '织女星', '视星等', '绝对星等', '光度'],
+                content: [
+                    {
+                        title: '全天五十亮星表',
+                        description: '全天最亮的50颗恒星按视星等排列',
+                        details: `
+                            <table>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>星名</th>
+                                    <th>视星等</th>
+                                    <th>所在星座</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>天狼星</td>
+                                    <td>-1.46</td>
+                                    <td>大犬座</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>老人星</td>
+                                    <td>-0.72</td>
+                                    <td>船底座</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>南门二</td>
+                                    <td>-0.27</td>
+                                    <td>半人马座</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>大角星</td>
+                                    <td>-0.04</td>
+                                    <td>牧夫座</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>织女星</td>
+                                    <td>0.03</td>
+                                    <td>琴座</td>
+                                </tr>
+                            </table>
+                            <p style="margin-top: 15px; font-size: 12px; color: #90caf9;">注：表格仅显示前5颗，完整表格包含全天50颗最亮恒星</p>
+                        `
+                    },
+                    {
+                        title: '恒星的基本性质',
+                        description: '恒星的光度、温度、质量等基本参数',
+                        details: `
+                            <h4>恒星的主要性质</h4>
+                            <ul>
+                                <li><strong>视星等</strong>：从地球上看恒星的亮度</li>
+                                <li><strong>绝对星等</strong>：恒星在标准距离（10秒差距）处的亮度</li>
+                                <li><strong>光度</strong>：恒星单位时间内辐射的总能量</li>
+                                <li><strong>表面温度</strong>：决定恒星的颜色和光谱类型</li>
+                                <li><strong>质量</strong>：恒星的物质总量</li>
+                            </ul>
+                            <h4>赫罗图</h4>
+                            <p>赫罗图是以绝对星等为纵轴、光谱类型（或表面温度）为横轴的图表，显示恒星的演化规律。</p>
+                        `
+                    }
+                ]
+            },
             
-            // 显示选中的菜单
-            document.getElementById(menuId).classList.add('active');
+            constellations: {
+                name: '🌌 星座与黄道',
+                icon: '🌌',
+                keywords: ['星座', '黄道', '十二宫', '白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯', '水瓶', '双鱼', '星座记忆'],
+                content: [
+                    {
+                        title: '黄道十二宫表',
+                        description: '太阳在黄道上运行一年所经过的12个星座',
+                        details: `
+                            <table>
+                                <tr>
+                                    <th>宫名</th>
+                                    <th>对应星座</th>
+                                    <th>太阳进入日期</th>
+                                    <th>太阳离开日期</th>
+                                </tr>
+                                <tr>
+                                    <td>白羊宫</td>
+                                    <td>白羊座</td>
+                                    <td>3月21日</td>
+                                    <td>4月19日</td>
+                                </tr>
+                                <tr>
+                                    <td>金牛宫</td>
+                                    <td>金牛座</td>
+                                    <td>4月20日</td>
+                                    <td>5月20日</td>
+                                </tr>
+                                <tr>
+                                    <td>双子宫</td>
+                                    <td>双子座</td>
+                                    <td>5月21日</td>
+                                    <td>6月20日</td>
+                                </tr>
+                                <tr>
+                                    <td>巨蟹宫</td>
+                                    <td>巨蟹座</td>
+                                    <td>6月21日</td>
+                                    <td>7月22日</td>
+                                </tr>
+                                <tr>
+                                    <td>狮子宫</td>
+                                    <td>狮子座</td>
+                                    <td>7月23日</td>
+                                    <td>8月22日</td>
+                                </tr>
+                                <tr>
+                                    <td>处女宫</td>
+                                    <td>处女座</td>
+                                    <td>8月23日</td>
+                                    <td>9月22日</td>
+                                </tr>
+                                <tr>
+                                    <td>天秤宫</td>
+                                    <td>天秤座</td>
+                                    <td>9月23日</td>
+                                    <td>10月22日</td>
+                                </tr>
+                                <tr>
+                                    <td>天蝎宫</td>
+                                    <td>天蝎座</td>
+                                    <td>10月23日</td>
+                                    <td>11月21日</td>
+                                </tr>
+                                <tr>
+                                    <td>射手宫</td>
+                                    <td>射手座</td>
+                                    <td>11月22日</td>
+                                    <td>12月21日</td>
+                                </tr>
+                                <tr>
+                                    <td>摩羯宫</td>
+                                    <td>摩羯座</td>
+                                    <td>12月22日</td>
+                                    <td>1月19日</td>
+                                </tr>
+                                <tr>
+                                    <td>水瓶宫</td>
+                                    <td>水瓶座</td>
+                                    <td>1月20日</td>
+                                    <td>2月18日</td>
+                                </tr>
+                                <tr>
+                                    <td>双鱼宫</td>
+                                    <td>双鱼座</td>
+                                    <td>2月19日</td>
+                                    <td>3月20日</td>
+                                </tr>
+                            </table>
+                        `
+                    },
+                    {
+                        title: 'β星比α星亮的星座',
+                        description: '在某些星座中，β星的亮度比α星更亮',
+                        details: `
+                            <table>
+                                <tr>
+                                    <th>星座</th>
+                                    <th>α星</th>
+                                    <th>α星视星等</th>
+                                    <th>β星</th>
+                                    <th>β星视星等</th>
+                                </tr>
+                                <tr>
+                                    <td>金牛座</td>
+                                    <td>毕宿五</td>
+                                    <td>0.85</td>
+                                    <td>毕宿二</td>
+                                    <td>1.65</td>
+                                </tr>
+                                <tr>
+                                    <td>巨蟹座</td>
+                                    <td>北极星增四</td>
+                                    <td>4.26</td>
+                                    <td>鬼宿</td>
+                                    <td>3.52</td>
+                                </tr>
+                                <tr>
+                                    <td>狮子座</td>
+                                    <td>轩辕十四</td>
+                                    <td>1.35</td>
+                                    <td>五帝座一</td>
+                                    <td>1.44</td>
+                                </tr>
+                                <tr>
+                                    <td>处女座</td>
+                                    <td>角宿一</td>
+                                    <td>0.98</td>
+                                    <td>角宿二</td>
+                                    <td>1.84</td>
+                                </tr>
+                                <tr>
+                                    <td>天蝎座</td>
+                                    <td>心宿二</td>
+                                    <td>0.96</td>
+                                    <td>心宿增十</td>
+                                    <td>1.91</td>
+                                </tr>
+                                <tr>
+                                    <td>射手座</td>
+                                    <td>斗宿一</td>
+                                    <td>2.59</td>
+                                    <td>斗宿二</td>
+                                    <td>1.83</td>
+                                </tr>
+                                <tr>
+                                    <td>摩羯座</td>
+                                    <td>垒壁阵一</td>
+                                    <td>3.57</td>
+                                    <td>垒壁阵二</td>
+                                    <td>3.03</td>
+                                </tr>
+                                <tr>
+                                    <td>双鱼座</td>
+                                    <td>右更一</td>
+                                    <td>3.82</td>
+                                    <td>右更二</td>
+                                    <td>2.04</td>
+                                </tr>
+                            </table>
+                        `
+                    }
+                ]
+            },
             
-            // 如果是知识点库菜单，显示第一个内容
-            if (menuId === 'libMenu') {
-                showContent('brightStars');
-                clearSearch();
+            planets: {
+                name: '🪐 行星与天体',
+                icon: '🪐',
+                keywords: ['行星', '天体', '太阳系', '地球', '火星', '金星', '木星', '土星', '水星', '天王星', '海王星', '冥王星', '小行星', '彗星'],
+                content: [
+                    {
+                        title: '太阳系八大行星',
+                        description: '太阳系中的八颗行星及其基本特征',
+                        details: `
+                            <h4>八大行星（按距太阳远近排列）</h4>
+                            <ul>
+                                <li><strong>水星</strong>：最小的行星，距太阳最近</li>
+                                <li><strong>金星</strong>：最亮的行星，表面温度最高</li>
+                                <li><strong>地球</strong>：唯一有生命的行星</li>
+                                <li><strong>火星</strong>：红色行星，有两个卫星</li>
+                                <li><strong>木星</strong>：最大的行星，有强大的磁场</li>
+                                <li><strong>土星</strong>：以美丽的光环著称</li>
+                                <li><strong>天王星</strong>：自转轴倾斜最大</li>
+                                <li><strong>海王星</strong>：距太阳最远的行星</li>
+                            </ul>
+                            <h4>行星的分类</h4>
+                            <ul>
+                                <li><strong>类地行星</strong>：水星、金星、地球、火星（密度大，体积小）</li>
+                                <li><strong>类木行星</strong>：木星、土星、天王星、海王星（密度小，体积大）</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: '小行星与彗星',
+                        description: '太阳系中的小天体',
+                        details: `
+                            <h4>小行星</h4>
+                            <ul>
+                                <li>主要分布在火星和木星之间的小行星带</li>
+                                <li>数量众多，体积较小</li>
+                                <li>由岩石和金属组成</li>
+                            </ul>
+                            <h4>彗星</h4>
+                            <ul>
+                                <li>由冰、岩石和尘埃组成</li>
+                                <li>接近太阳时会形成彗尾</li>
+                                <li>著名彗星：哈雷彗星（76年回归一次）</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+            
+            units: {
+                name: '📏 天文单位与换算',
+                icon: '📏',
+                keywords: ['换算', '单位', '天文单位', '光年', '秒差距', '角度', '亮度', '距离', 'AU', 'pc', 'ly'],
+                content: [
+                    {
+                        title: '天文单位换算',
+                        description: '天文学中常用的距离、角度和亮度单位',
+                        details: `
+                            <h4>距离单位换算</h4>
+                            <ul>
+                                <li><strong>1 天文单位 (AU)</strong> = 1.496 × 10¹¹ 米 ≈ 1.5 亿公里</li>
+                                <li><strong>1 光年 (ly)</strong> = 9.461 × 10¹⁵ 米</li>
+                                <li><strong>1 秒差距 (pc)</strong> = 3.086 × 10¹⁶ 米 = 3.26 光年</li>
+                                <li><strong>1 千秒差距 (kpc)</strong> = 1000 pc</li>
+                                <li><strong>1 兆秒差距 (Mpc)</strong> = 1000000 pc</li>
+                            </ul>
+                            <h4>角度单位换算</h4>
+                            <ul>
+                                <li><strong>1 度 (°)</strong> = 60 分 (′) = 3600 秒 (″)</li>
+                                <li><strong>1 弧分 (′)</strong> = 60 弧秒 (″)</li>
+                                <li><strong>1 弧度 (rad)</strong> = 57.3°</li>
+                                <li><strong>1 圆周</strong> = 360° = 2π rad</li>
+                            </ul>
+                            <h4>亮度单位换算</h4>
+                            <ul>
+                                <li><strong>视星等差 1</strong> = 亮度比 2.512 倍</li>
+                                <li><strong>视星等差 5</strong> = 亮度比 100 倍</li>
+                                <li><strong>绝对星等</strong> = 视星等 + 5 - 5lg(距离/pc)</li>
+                                <li><strong>距离模数</strong> = m - M = 5lg(d) - 5（d为距离，单位pc）</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+            
+            spacecraft: {
+                name: '🛸 航天器与探测',
+                icon: '🛸',
+                keywords: ['航天器', '航天', '卫星', '飞船', '探测器', '神舟', '天宫', '天舟', '北斗', '嫦娥', '祝融', '国内', '国际', '空间站', '望远镜', '哈勃', '韦伯', 'GPS', '伽利略', '火星', '月球'],
+                content: [
+                    {
+                        title: '国内航天器',
+                        description: '中国主要航天器及卫星项目',
+                        details: `
+                            <table>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>类型</th>
+                                    <th>发射时间</th>
+                                    <th>用途</th>
+                                </tr>
+                                <tr>
+                                    <td>神舟系列</td>
+                                    <td>载人飞船</td>
+                                    <td>1999年-至今</td>
+                                    <td>载人航天</td>
+                                </tr>
+                                <tr>
+                                    <td>天宫系列</td>
+                                    <td>空间站</td>
+                                    <td>2011年-至今</td>
+                                    <td>空间科学实验</td>
+                                </tr>
+                                <tr>
+                                    <td>天舟系列</td>
+                                    <td>货运飞船</td>
+                                    <td>2017年-至今</td>
+                                    <td>空间站补给</td>
+                                </tr>
+                                <tr>
+                                    <td>北斗导航卫星</td>
+                                    <td>导航卫星</td>
+                                    <td>2000年-至今</td>
+                                    <td>导航定位</td>
+                                </tr>
+                                <tr>
+                                    <td>嫦娥系列</td>
+                                    <td>月球探测器</td>
+                                    <td>2007年-至今</td>
+                                    <td>月球探测</td>
+                                </tr>
+                                <tr>
+                                    <td>祝融号</td>
+                                    <td>火星探测器</td>
+                                    <td>2021年</td>
+                                    <td>火星探测</td>
+                                </tr>
+                            </table>
+                        `
+                    },
+                    {
+                        title: '国际航天器',
+                        description: '主要国际航天器及卫星项目',
+                        details: `
+                            <table>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>国家/组织</th>
+                                    <th>类型</th>
+                                    <th>用途</th>
+                                </tr>
+                                <tr>
+                                    <td>国际空间站 (ISS)</td>
+                                    <td>多国合作</td>
+                                    <td>空间站</td>
+                                    <td>科学研究</td>
+                                </tr>
+                                <tr>
+                                    <td>哈勃太空望远镜</td>
+                                    <td>美国/欧洲</td>
+                                    <td>空间望远镜</td>
+                                    <td>天文观测</td>
+                                </tr>
+                                <tr>
+                                    <td>詹姆斯·韦伯太空望远镜</td>
+                                    <td>美国/欧洲/加拿大</td>
+                                    <td>空间望远镜</td>
+                                    <td>深空观测</td>
+                                </tr>
+                                <tr>
+                                    <td>GPS卫星</td>
+                                    <td>美国</td>
+                                    <td>导航卫星</td>
+                                    <td>导航定位</td>
+                                </tr>
+                                <tr>
+                                    <td>伽利略卫星系统</td>
+                                    <td>欧洲</td>
+                                    <td>导航卫星</td>
+                                    <td>导航定位</td>
+                                </tr>
+                                <tr>
+                                    <td>火星探测器 (Perseverance)</td>
+                                    <td>美国</td>
+                                    <td>火星探测器</td>
+                                    <td>火星探测</td>
+                                </tr>
+                            </table>
+                        `
+                    }
+                ]
             }
+        };
+
+        // ==================== 题库数据存储 ====================
+        let questionBank = {
+            stars: [],
+            constellations: [],
+            planets: [],
+            units: [],
+            spacecraft: []
+        };
+
+        // ==================== 初始化 ====================
+        function initializeLibrary() {
+            renderCategoryButtons();
+            showCategory('stars');
         }
 
-        function showContent(contentId) {
-            // 隐藏所有内容页面
-            const pages = document.querySelectorAll('.content-page');
-            pages.forEach(page => page.classList.remove('active'));
+        // ==================== 分类按钮渲染 ====================
+        function renderCategoryButtons() {
+            const container = document.getElementById('categoryButtons');
+            container.innerHTML = '';
             
-            // 显示选中的内容
-            document.getElementById(contentId).classList.add('active');
+            Object.entries(knowledgeCategories).forEach(([key, category]) => {
+                const btn = document.createElement('button');
+                btn.className = 'category-btn active';
+                btn.textContent = category.name;
+                btn.onclick = () => showCategory(key);
+                container.appendChild(btn);
+            });
+        }
+
+        // ==================== 显示分类内容 ====================
+        function showCategory(categoryKey) {
+            const category = knowledgeCategories[categoryKey];
+            const contentArea = document.getElementById('contentArea');
             
-            // 清空搜索框
+            // 更新按钮状态
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 清空搜索
             document.getElementById('searchInput').value = '';
             document.getElementById('searchResults').classList.remove('active');
+            
+            // 生成内容
+            let html = `<h3>${category.icon} ${category.name}</h3>`;
+            
+            category.content.forEach((item, index) => {
+                html += `
+                    <div class="knowledge-item">
+                        <h5>${item.title}</h5>
+                        <p>${item.description}</p>
+                        ${item.details}
+                        <div class="related-questions">
+                            <strong>📝 相关题目：</strong> 
+                            <span id="question-count-${categoryKey}-${index}">加载中...</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // 添加题库导入提示
+            html += `
+                <div class="import-section" style="margin-top: 30px;">
+                    <h4>💡 提示</h4>
+                    <p>导入题库后，相关题目数量会在这里显示。请前往"题库"菜单导入题库文件。</p>
+                </div>
+            `;
+            
+            contentArea.innerHTML = html;
+            updateRelatedQuestionsCount(categoryKey);
         }
 
-        function selectDifficulty(difficulty) {
-            const difficultyNames = {
-                'beginner': '初学者',
-                'intermediate': '中等水平',
-                'advanced': '高水平'
-            };
-            alert('您选择了：' + difficultyNames[difficulty]);
+        // ==================== 更新相关题目计数 ====================
+        function updateRelatedQuestionsCount(categoryKey) {
+            const count = questionBank[categoryKey] ? questionBank[categoryKey].length : 0;
+            const elements = document.querySelectorAll(`[id^="question-count-${categoryKey}"]`);
+            elements.forEach(el => {
+                el.textContent = count > 0 ? `${count} 道题目` : '暂无题目';
+            });
         }
 
+        // ==================== 搜索功能 ====================
         function searchKnowledgePoints() {
             const searchInput = document.getElementById('searchInput').value.trim().toLowerCase();
             const searchResults = document.getElementById('searchResults');
@@ -673,19 +920,33 @@
                 return;
             }
             
-            // 搜索匹配的知识点
-            const results = knowledgePoints.filter(point => {
-                return point.keywords.some(keyword => keyword.includes(searchInput)) || 
-                       point.title.toLowerCase().includes(searchInput);
+            const results = [];
+            
+            Object.entries(knowledgeCategories).forEach(([key, category]) => {
+                category.content.forEach(item => {
+                    const matchTitle = item.title.toLowerCase().includes(searchInput);
+                    const matchKeywords = category.keywords.some(kw => kw.includes(searchInput));
+                    
+                    if (matchTitle || matchKeywords) {
+                        results.push({
+                            title: item.title,
+                            category: category.name,
+                            categoryKey: key,
+                            description: item.description
+                        });
+                    }
+                });
             });
             
-            // 显示搜索结果
             if (results.length > 0) {
                 let html = '';
                 results.forEach(result => {
-                    html += `<div class="search-result-item" onclick="showContent('${result.id}')">
-                        <strong>${result.title}</strong>
-                    </div>`;
+                    html += `
+                        <div class="search-result-item" onclick="showCategory('${result.categoryKey}')">
+                            <strong>${result.title}</strong>
+                            <div class="search-result-category">${result.category}</div>
+                        </div>
+                    `;
                 });
                 searchResults.innerHTML = html;
                 searchResults.classList.add('active');
@@ -695,10 +956,112 @@
             }
         }
 
-        function clearSearch() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('searchResults').classList.remove('active');
+        // ==================== 菜单切换 ====================
+        function showMenu(menuId) {
+            const menus = document.querySelectorAll('.menu');
+            menus.forEach(menu => menu.classList.remove('active'));
+            document.getElementById(menuId).classList.add('active');
+            
+            if (menuId === 'libMenu') {
+                initializeLibrary();
+            } else if (menuId === 'questionMenu') {
+                renderQuestionCategories();
+            }
         }
+
+        // ==================== 题库导入 ====================
+        function importQuestionBank() {
+            const fileInput = document.getElementById('questionImportInput');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    // 重置题库
+                    questionBank = {
+                        stars: [],
+                        constellations: [],
+                        planets: [],
+                        units: [],
+                        spacecraft: []
+                    };
+                    
+                    // 导入题目
+                    if (Array.isArray(data)) {
+                        data.forEach(question => {
+                            const category = question.category || 'stars';
+                            if (questionBank[category]) {
+                                questionBank[category].push(question);
+                            }
+                        });
+                    }
+                    
+                    alert(`✅ 题库导入成功！共导入 ${data.length} 道题目`);
+                    renderQuestionCategories();
+                    
+                    // 更新知识点库中的题目计数
+                    Object.keys(questionBank).forEach(key => {
+                        updateRelatedQuestionsCount(key);
+                    });
+                    
+                } catch (error) {
+                    alert('❌ 导入失败：' + error.message);
+                }
+            };
+            reader.readAsText(file);
+            
+            // 重置文件输入
+            fileInput.value = '';
+        }
+
+        // ==================== 题库分类显示 ====================
+        function renderQuestionCategories() {
+            const container = document.getElementById('questionCategoriesContainer');
+            container.innerHTML = '';
+            
+            const categoryNames = {
+                stars: '⭐ 恒星知识',
+                constellations: '🌌 星座与黄道',
+                planets: '🪐 行星与天体',
+                units: '📏 天文单位与换算',
+                spacecraft: '🛸 航天器与探测'
+            };
+            
+            Object.entries(questionBank).forEach(([key, questions]) => {
+                const categoryName = categoryNames[key];
+                let html = `
+                    <div style="margin-bottom: 30px;">
+                        <h3>${categoryName}</h3>
+                `;
+                
+                if (questions.length === 0) {
+                    html += '<div class="empty-state">暂无题目，请导入题库</div>';
+                } else {
+                    html += '<div class="question-list">';
+                    questions.forEach((q, index) => {
+                        html += `
+                            <div class="question-item">
+                                <strong>第 ${index + 1} 题：${q.question || '题目'}</strong>
+                                <p>答案：${q.answer || '未设置'}</p>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
+                
+                html += '</div>';
+                container.innerHTML += html;
+            });
+        }
+
+        // ==================== 页面加载 ====================
+        window.addEventListener('load', () => {
+            showMenu('mainMenu');
+        });
     </script>
 </body>
 </html>
