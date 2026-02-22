@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>天文知识库与题库系统</title>
     <style>
-         :root {
+        :root {
             --bg-start: #070b1f;
             --bg-mid: #0d1536;
             --bg-end: #111e49;
@@ -19,6 +19,7 @@
             --radius-md: 12px;
             --radius-sm: 8px;
         }
+
         * {
             margin: 0;
             padding: 0;
@@ -215,12 +216,13 @@
         }
         
         .content-area {
-            background-color: rgba(30, 60, 114, 0.3);
-            border: 2px solid #64b5f6;
-            border-radius: 8px;
+            background-color: rgba(16, 40, 92, 0.45);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius-md);
             padding: 20px;
             margin-top: 20px;
             min-height: 400px;
+            box-shadow: inset 0 1px 0 rgba(150, 205, 255, 0.16);
         }
         
         .content-page {
@@ -267,13 +269,41 @@
             background-color: rgba(100, 181, 246, 0.2);
             color: #64b5f6;
         }
+
+
+        .star-table-container {
+            margin-top: 12px;
+            border: 1px solid rgba(141, 206, 255, 0.45);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(7, 16, 45, 0.28);
+            background: rgba(11, 28, 70, 0.52);
+        }
+
+        .star-table-container table {
+            margin-top: 0;
+        }
+
+        .star-table-container th {
+            background: linear-gradient(135deg, rgba(94, 181, 255, 0.28), rgba(65, 129, 218, 0.25));
+            letter-spacing: 0.5px;
+        }
+
+        .star-table-container tbody tr:nth-child(odd) {
+            background: rgba(141, 206, 255, 0.06);
+        }
+
+        .star-table-container tbody tr:hover {
+            background: rgba(141, 206, 255, 0.16);
+        }
         
         .knowledge-item {
             background-color: rgba(100, 181, 246, 0.1);
             border-left: 4px solid #64b5f6;
             padding: 15px;
             margin-bottom: 15px;
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 8px 16px rgba(9, 24, 57, 0.22);
         }
         
         .knowledge-item h5 {
@@ -315,10 +345,35 @@
         .import-section {
             background-color: rgba(255, 152, 0, 0.1);
             border: 2px dashed #ff9800;
-            border-radius: 8px;
+            border-radius: var(--radius-md);
             padding: 20px;
             margin-top: 20px;
             text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                padding: 18px;
+                border-radius: 14px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            button,
+            .result-btn,
+            .quiz-btn {
+                width: 100%;
+            }
         }
         
         .import-section h4 {
@@ -502,6 +557,51 @@
             font-size: 14px;
             color: #90caf9;
             margin-top: 10px;
+        }
+
+
+        /* ========== 智能测评界面 ========== */
+        .adaptive-panel {
+            background-color: rgba(30, 60, 114, 0.3);
+            border: 2px solid #64b5f6;
+            border-radius: 10px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .adaptive-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .adaptive-level-btn {
+            background: linear-gradient(135deg, #1a3a52 0%, #1e5a96 100%);
+            border: 2px solid #42a5f5;
+            padding: 14px 12px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .adaptive-level-btn.active {
+            border-color: #81c784;
+            box-shadow: 0 0 12px rgba(129, 199, 132, 0.65);
+        }
+
+        .adaptive-meta {
+            margin-top: 15px;
+            color: #90caf9;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .adaptive-start-btn {
+            margin-top: 18px;
+            background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+            border-color: #81c784;
         }
 
         /* ========== 答题界面 ========== */
@@ -815,9 +915,11 @@
         <!-- 主菜单 -->
         <div id="mainMenu" class="menu active">
             <h1>🌟 天文知识库与题库系统 🌟</h1>
+            <p class="page-subtitle">探索天文知识、导入题库并进行分级练习，学习更直观。</p>
             <div class="menu-buttons">
-                <button onclick="showMenu('libMenu')">📚 知识点库</button>
-                <button onclick="showMenu('questionMenu')">❓ 题库</button>
+                <button id="openLibBtn" type="button" onclick="showMenu('libMenu')">📚 知识点库</button>
+                <button id="openQuestionBtn" type="button" onclick="showMenu('questionMenu')">❓ 题库</button>
+                <button type="button" onclick="showMenu('adaptiveMenu')">🎯 智能测评做题</button>
             </div>
         </div>
 
@@ -899,6 +1001,28 @@
             <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
         </div>
 
+
+        <!-- 智能测评界面 -->
+        <div id="adaptiveMenu" class="menu">
+            <h2>🎯 智能测评做题</h2>
+            <div class="adaptive-panel">
+                <h3>选择当前水平</h3>
+                <p class="adaptive-meta">系统会根据你的答题正误自动评估薄弱知识点，后续增加该类题目的出现频率，并穿插你答错过的原题进行强化。</p>
+
+                <div class="adaptive-levels" id="adaptiveLevels">
+                    <button class="adaptive-level-btn active" data-level="mixed" onclick="selectAdaptiveLevel('mixed', this)">综合（推荐）</button>
+                    <button class="adaptive-level-btn" data-level="easy" onclick="selectAdaptiveLevel('easy', this)">基础巩固</button>
+                    <button class="adaptive-level-btn" data-level="medium" onclick="selectAdaptiveLevel('medium', this)">进阶训练</button>
+                    <button class="adaptive-level-btn" data-level="hard" onclick="selectAdaptiveLevel('hard', this)">高阶挑战</button>
+                </div>
+
+                <div class="adaptive-meta" id="adaptiveMeta"></div>
+
+                <button class="adaptive-start-btn" onclick="startAdaptiveQuiz()">开始智能测评</button>
+            </div>
+            <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
+        </div>
+
         <!-- 答题界面 -->
         <div id="quizMenu" class="menu">
             <div class="quiz-container">
@@ -970,7 +1094,7 @@
                         title: '全天五十亮星表',
                         description: '全天最亮的50颗恒星按视星等排列',
                         details: `
-                                                        <h4>全天五十亮星（按视星等）</h4>
+                            <h4>全天五十亮星（按视星等）</h4>
                             <p style="color:#90caf9; margin-bottom: 10px;">覆盖全天常见亮星，便于观测入门和星空定位。</p>
                             <div class="star-table-container">
                                 <table>
@@ -1416,6 +1540,8 @@
         };
 
         // ==================== 题库数据存储 ====================
+        let questionIdCounter = 0;
+
         let questionBank = {
             stars: [],
             constellations: [],
@@ -1426,6 +1552,7 @@
 
         // ==================== 答题状态 ====================
         let quizState = {
+            mode: "standard",
             currentCategory: null,
             currentDifficulty: null,
             currentQuestionIndex: 0,
@@ -1433,13 +1560,21 @@
             userAnswers: [],
             isAnswered: false,
             correctCount: 0,
-            wrongCount: 0
+            wrongCount: 0,
+            targetCount: 0
+        };
+
+        let adaptiveState = {
+            selectedLevel: "mixed",
+            wrongByCategory: {},
+            askedIds: new Set(),
+            retryQueue: []
         };
 
         // ==================== 初始化 ====================
         function initializeLibrary() {
             renderCategoryButtons();
-            showCategory('stars');
+            showCategory('stars', document.querySelector('#categoryButtons .category-btn'));
         }
 
         // ==================== 分类按钮渲染 ====================
@@ -1451,13 +1586,13 @@
                 const btn = document.createElement('button');
                 btn.className = 'category-btn active';
                 btn.textContent = category.name;
-                btn.onclick = () => showCategory(key);
+                btn.onclick = () => showCategory(key, btn);
                 container.appendChild(btn);
             });
         }
 
         // ==================== 显示分类内容 ====================
-        function showCategory(categoryKey) {
+        function showCategory(categoryKey, activeButton = null) {
             const category = knowledgeCategories[categoryKey];
             const contentArea = document.getElementById('contentArea');
             
@@ -1465,7 +1600,16 @@
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
+
+            if (activeButton) {
+                activeButton.classList.add('active');
+            } else {
+                const matchedBtn = Array.from(document.querySelectorAll('.category-btn'))
+                    .find(btn => btn.textContent === category.name);
+                if (matchedBtn) {
+                    matchedBtn.classList.add('active');
+                }
+            }
             
             // 清空搜索
             document.getElementById('searchInput').value = '';
@@ -1505,7 +1649,7 @@
             const count = questionBank[categoryKey] ? questionBank[categoryKey].length : 0;
             const elements = document.querySelectorAll(`[id^="question-count-${categoryKey}"]`);
             elements.forEach(el => {
-                el.textContent = count > 0 ? `<a onclick="startCategoryQuiz('${categoryKey}')">${count} 道题 → 开始答题</a>` : '暂无题目';
+                el.innerHTML = count > 0 ? `<a onclick="startCategoryQuiz('${categoryKey}')">${count} 道题 → 开始答题</a>` : '暂无题目';
             });
         }
 
@@ -1541,7 +1685,7 @@
                 let html = '';
                 results.forEach(result => {
                     html += `
-                        <div class="search-result-item" onclick="showCategory('${result.categoryKey}')">
+                        <div class="search-result-item" onclick="showCategory('${result.categoryKey}', null)">
                             <strong>${result.title}</strong>
                             <div class="search-result-category">${result.category}</div>
                         </div>
@@ -1565,6 +1709,8 @@
                 initializeLibrary();
             } else if (menuId === 'questionMenu') {
                 renderQuestionCategories();
+            } else if (menuId === 'adaptiveMenu') {
+                renderAdaptiveMeta();
             }
         }
 
@@ -1594,7 +1740,11 @@
                         data.forEach(question => {
                             const category = question.category || 'stars';
                             if (questionBank[category]) {
-                                questionBank[category].push(question);
+                                questionBank[category].push({
+                                    ...question,
+                                    category,
+                                    _qid: question._qid || `q_${questionIdCounter++}`
+                                });
                             }
                         });
                     }
@@ -1707,6 +1857,7 @@
             }
             
             // 随机打乱题目
+            quizState.mode = "standard";
             quizState.questions = filteredQuestions.sort(() => Math.random() - 0.5);
             quizState.currentDifficulty = difficulty;
             quizState.currentQuestionIndex = 0;
@@ -1714,6 +1865,7 @@
             quizState.isAnswered = false;
             quizState.correctCount = 0;
             quizState.wrongCount = 0;
+            quizState.targetCount = quizState.questions.length;
             
             // 设置分类显示
             const categoryNames = {
@@ -1727,6 +1879,105 @@
             document.getElementById('categoryDisplay').textContent = categoryNames[quizState.currentCategory];
             document.getElementById('totalQuestions').textContent = quizState.questions.length;
             
+            showMenu('quizMenu');
+            displayQuestion();
+        }
+
+
+        function selectAdaptiveLevel(level, buttonEl) {
+            adaptiveState.selectedLevel = level;
+            document.querySelectorAll('.adaptive-level-btn').forEach(btn => btn.classList.remove('active'));
+            if (buttonEl) buttonEl.classList.add('active');
+            renderAdaptiveMeta();
+        }
+
+        function renderAdaptiveMeta() {
+            const allQuestions = Object.values(questionBank).flat();
+            const byLevel = level => allQuestions.filter(q => q.difficulty === level).length;
+            const meta = document.getElementById('adaptiveMeta');
+            if (!meta) return;
+
+            meta.innerHTML = `当前题库共 <strong>${allQuestions.length}</strong> 道题：
+                基础 ${byLevel('easy')} 道 / 进阶 ${byLevel('medium')} 道 / 高阶 ${byLevel('hard')} 道。
+                智能测评默认每次抽取 12 题。`;
+        }
+
+        function getAdaptivePool() {
+            const allQuestions = Object.values(questionBank).flat();
+            if (adaptiveState.selectedLevel === 'mixed') return allQuestions;
+            return allQuestions.filter(q => q.difficulty === adaptiveState.selectedLevel);
+        }
+
+        function pickAdaptiveQuestion() {
+            const pool = getAdaptivePool();
+            if (pool.length === 0) return null;
+
+            while (adaptiveState.retryQueue.length > 0) {
+                const retryId = adaptiveState.retryQueue.shift();
+                const retryQuestion = pool.find(q => q._qid === retryId);
+                if (retryQuestion) return retryQuestion;
+            }
+
+            const unused = pool.filter(q => !adaptiveState.askedIds.has(q._qid));
+            const candidates = unused.length > 0 ? unused : pool;
+
+            const grouped = {};
+            candidates.forEach(q => {
+                const key = q.category || 'stars';
+                if (!grouped[key]) grouped[key] = [];
+                grouped[key].push(q);
+            });
+
+            const categories = Object.keys(grouped);
+            const weights = categories.map(cat => 1 + (adaptiveState.wrongByCategory[cat] || 0) * 2);
+            const sum = weights.reduce((a, b) => a + b, 0);
+            let rand = Math.random() * sum;
+            let selectedCategory = categories[0];
+
+            for (let i = 0; i < categories.length; i++) {
+                rand -= weights[i];
+                if (rand <= 0) {
+                    selectedCategory = categories[i];
+                    break;
+                }
+            }
+
+            const list = grouped[selectedCategory];
+            return list[Math.floor(Math.random() * list.length)];
+        }
+
+        function startAdaptiveQuiz() {
+            const totalQuestions = Object.values(questionBank).reduce((sum, arr) => sum + arr.length, 0);
+            if (totalQuestions === 0) {
+                alert('请先在题库菜单导入题目后再开始智能测评');
+                return;
+            }
+
+            quizState.mode = 'adaptive';
+            quizState.currentCategory = 'adaptive';
+            quizState.currentDifficulty = adaptiveState.selectedLevel;
+            quizState.currentQuestionIndex = 0;
+            quizState.userAnswers = [];
+            quizState.isAnswered = false;
+            quizState.correctCount = 0;
+            quizState.wrongCount = 0;
+            quizState.targetCount = 12;
+
+            adaptiveState.wrongByCategory = {};
+            adaptiveState.askedIds = new Set();
+            adaptiveState.retryQueue = [];
+
+            const firstQuestion = pickAdaptiveQuestion();
+            if (!firstQuestion) {
+                alert('当前所选水平没有可用题目，请切换水平重试');
+                return;
+            }
+
+            quizState.questions = [firstQuestion];
+            adaptiveState.askedIds.add(firstQuestion._qid);
+
+            document.getElementById('categoryDisplay').textContent = '🎯 智能测评模式';
+            document.getElementById('totalQuestions').textContent = quizState.targetCount;
             showMenu('quizMenu');
             displayQuestion();
         }
@@ -1792,6 +2043,11 @@
                 quizState.correctCount++;
             } else {
                 quizState.wrongCount++;
+                if (quizState.mode === "adaptive") {
+                    const cat = question.category || "stars";
+                    adaptiveState.wrongByCategory[cat] = (adaptiveState.wrongByCategory[cat] || 0) + 1;
+                    adaptiveState.retryQueue.push(question._qid);
+                }
             }
             
             // 显示反馈
@@ -1833,7 +2089,7 @@
             // 显示下一题或完成按钮
             document.getElementById('submitBtn').style.display = 'none';
             
-            if (quizState.currentQuestionIndex < quizState.questions.length - 1) {
+            if (quizState.currentQuestionIndex < quizState.targetCount - 1) {
                 document.getElementById('nextBtn').style.display = 'block';
             } else {
                 document.getElementById('finishBtn').style.display = 'block';
@@ -1845,12 +2101,23 @@
         // ==================== 下一题 ====================
         function nextQuestion() {
             quizState.currentQuestionIndex++;
+
+            if (quizState.mode === "adaptive" && quizState.currentQuestionIndex >= quizState.questions.length) {
+                const nextAdaptive = pickAdaptiveQuestion();
+                if (!nextAdaptive) {
+                    finishQuiz();
+                    return;
+                }
+                quizState.questions.push(nextAdaptive);
+                adaptiveState.askedIds.add(nextAdaptive._qid);
+            }
+
             displayQuestion();
         }
 
         // ==================== 完成答题 ====================
         function finishQuiz() {
-            const totalQuestions = quizState.questions.length;
+            const totalQuestions = quizState.targetCount || quizState.questions.length;
             const correctRate = Math.round((quizState.correctCount / totalQuestions) * 100);
             
             // 确定评价等级
@@ -1882,13 +2149,32 @@
 
         // ==================== 返回分类选择 ====================
         function backToCategorySelector() {
+            if (quizState.mode === "adaptive") {
+                showMenu('adaptiveMenu');
+                return;
+            }
             document.getElementById('categorySelector').style.display = 'block';
             document.getElementById('difficultySelector').style.display = 'none';
             showMenu('questionMenu');
         }
 
+
+        function bindMainMenuActions() {
+            const openLibBtn = document.getElementById('openLibBtn');
+            const openQuestionBtn = document.getElementById('openQuestionBtn');
+
+            if (openLibBtn) {
+                openLibBtn.addEventListener('click', () => showMenu('libMenu'));
+            }
+
+            if (openQuestionBtn) {
+                openQuestionBtn.addEventListener('click', () => showMenu('questionMenu'));
+            }
+        }
+
         // ==================== 页面加载 ====================
         window.addEventListener('load', () => {
+            bindMainMenuActions();
             showMenu('mainMenu');
         });
     </script>
