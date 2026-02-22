@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>天文知识库与题库系统</title>
     <style>
+         :root {
+            --bg-start: #070b1f;
+            --bg-mid: #0d1536;
+            --bg-end: #111e49;
+            --text-primary: #e6f3ff;
+            --text-secondary: #a9c8eb;
+            --accent: #64b5f6;
+            --accent-soft: rgba(100, 181, 246, 0.16);
+            --panel-border: rgba(134, 197, 255, 0.55);
+            --panel-bg: rgba(10, 22, 56, 0.58);
+            --shadow-soft: 0 14px 30px rgba(6, 12, 35, 0.45);
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -12,24 +26,43 @@
         }
         
         body {
-            background-color: #0a0e27;
-            color: white;
-            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle at 15% 0%, #1f3f80 0%, transparent 45%),
+                        radial-gradient(circle at 85% 0%, #2f5da9 0%, transparent 35%),
+                        linear-gradient(180deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+            color: var(--text-primary);
+            font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
             padding: 20px;
             min-height: 100vh;
             transition: background-color 0.5s;
+            line-height: 1.7;
+            letter-spacing: 0.2px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1180px;
             margin: 0 auto;
+            padding: 28px;
+            border: 1px solid var(--panel-border);
+            background: var(--panel-bg);
+            border-radius: 18px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(8px);
         }
         
         h1, h2 {
             text-align: center;
             margin-bottom: 30px;
-            color: #64b5f6;
-            text-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+            color: #8bccff;
+            text-shadow: 0 4px 18px rgba(73, 165, 255, 0.35);
+            letter-spacing: 0.8px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            margin: -16px auto 26px;
+            color: var(--text-secondary);
+            max-width: 760px;
+            font-size: 15px;
         }
         
         h3 {
@@ -51,10 +84,11 @@
             color: white;
             padding: 15px 20px;
             font-size: 16px;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
+            box-shadow: 0 8px 18px rgba(4, 10, 28, 0.35);
         }
         
         button:hover {
