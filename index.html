@@ -53,7 +53,7 @@
         h1, h2 {
             text-align: center;
             margin-bottom: 30px;
-            color: #8bccff;
+            color: #64b5f6;
             text-shadow: 0 4px 18px rgba(73, 165, 255, 0.35);
             letter-spacing: 0.8px;
         }
@@ -534,7 +534,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .category-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
@@ -596,6 +595,24 @@
             color: #90caf9;
             font-size: 14px;
             line-height: 1.8;
+        }
+
+        .last-session-card {
+            margin-top: 14px;
+            background: rgba(100, 181, 246, 0.08);
+            border: 1px solid rgba(144, 202, 249, 0.45);
+            border-radius: 10px;
+            padding: 12px 14px;
+            text-align: left;
+            color: #b9dbff;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .last-session-card h4 {
+            font-size: 14px;
+            color: #90caf9;
+            margin-bottom: 6px;
         }
 
         .adaptive-start-btn {
@@ -866,6 +883,46 @@
             line-height: 1.6;
         }
 
+        .recommendation-panel {
+            margin-top: 22px;
+            text-align: left;
+            background: rgba(12, 32, 76, 0.46);
+            border: 1px solid rgba(129, 199, 132, 0.55);
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .recommendation-panel h4 {
+            color: #81c784;
+            margin-bottom: 10px;
+        }
+
+        .recommendation-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .recommendation-tag {
+            background: rgba(129, 199, 132, 0.14);
+            border: 1px solid rgba(129, 199, 132, 0.6);
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 12px;
+            color: #b9f6ca;
+        }
+
+        .recommendation-list {
+            margin-left: 20px;
+            color: #d8ebff;
+            line-height: 1.8;
+        }
+
+        .recommendation-empty {
+            color: #90caf9;
+        }
+
         .result-buttons {
             display: flex;
             gap: 15px;
@@ -908,6 +965,85 @@
         .result-btn.menu:hover {
             box-shadow: 0 0 15px rgba(239, 83, 80, 0.6);
         }
+
+        .auth-panel {
+            margin: 12px auto 22px;
+            max-width: 760px;
+            padding: 16px;
+            border: 1px solid rgba(134, 197, 255, 0.55);
+            border-radius: 12px;
+            background: rgba(10, 28, 70, 0.45);
+        }
+
+        .auth-title {
+            color: #8bccff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .auth-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: rgba(30, 60, 114, 0.5);
+            border: 1px solid #64b5f6;
+            border-radius: 8px;
+            color: #e6f3ff;
+        }
+
+        .auth-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .auth-btn {
+            padding: 10px 14px;
+            font-size: 14px;
+        }
+
+        .auth-status {
+            margin-top: 10px;
+            color: #90caf9;
+            font-size: 14px;
+        }
+
+        .history-card {
+            margin-top: 12px;
+            border: 1px solid rgba(134, 197, 255, 0.4);
+            border-radius: 10px;
+            padding: 12px;
+            background: rgba(11, 35, 83, 0.35);
+        }
+
+        .history-list {
+            margin-top: 8px;
+            padding-left: 20px;
+            color: #cbe3ff;
+        }
+
+        .history-list li {
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .history-empty {
+            color: #90caf9;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .auth-form {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -916,6 +1052,19 @@
         <div id="mainMenu" class="menu active">
             <h1>🌟 天文知识库与题库系统 🌟</h1>
             <p class="page-subtitle">探索天文知识、导入题库并进行分级练习，学习更直观。</p>
+            <div class="auth-panel">
+                <div class="auth-title">🔐 用户登录 / 注册（保存个人答题历史）</div>
+                <div class="auth-form">
+                    <input id="authUserId" class="auth-input" type="text" placeholder="输入用户ID（如：student01）">
+                    <input id="authPassword" class="auth-input" type="password" placeholder="输入密码">
+                    <button type="button" class="auth-btn" onclick="registerUser()">注册</button>
+                    <button type="button" class="auth-btn" onclick="loginUser()">登录</button>
+                </div>
+                <div class="auth-actions">
+                    <button type="button" class="auth-btn return-btn" style="margin-top:0;" onclick="logoutUser()">退出当前账号</button>
+                </div>
+                <div class="auth-status" id="authStatus">当前未登录。登录后将按用户保存答题历史与推荐。</div>
+            </div>
             <div class="menu-buttons">
                 <button id="openLibBtn" type="button" onclick="showMenu('libMenu')">📚 知识点库</button>
                 <button id="openQuestionBtn" type="button" onclick="showMenu('questionMenu')">❓ 题库</button>
@@ -945,7 +1094,7 @@
             <div class="category-buttons" id="categoryButtons"></div>
             
             <!-- 内容区域 -->
-            <div class="content-area" id="contentArea"></div>
+                        <div class="content-area" id="contentArea"></div>
             
             <button class="return-btn" onclick="showMenu('mainMenu')">← 返回主菜单</button>
         </div>
@@ -1017,6 +1166,8 @@
                 </div>
 
                 <div class="adaptive-meta" id="adaptiveMeta"></div>
+                <div class="last-session-card" id="lastSessionCard" style="display: none;"></div>
+                <div class="history-card" id="historyCard" style="display: none;"></div>
 
                 <button class="adaptive-start-btn" onclick="startAdaptiveQuiz()">开始智能测评</button>
             </div>
@@ -1048,7 +1199,7 @@
                     <button class="quiz-btn next" id="nextBtn" onclick="nextQuestion()" style="display: none;">下一题</button>
                     <button class="quiz-btn finish" id="finishBtn" onclick="finishQuiz()" style="display: none;">完成答题</button>
                 </div>
-            </div>
+             </div>
         </div>
 
         <!-- 答题结果界面 -->
@@ -1073,6 +1224,13 @@
                 </div>
 
                 <div class="result-message" id="resultMessage"></div>
+
+                <div class="recommendation-panel" id="recommendationPanel" style="display: none;">
+                    <h4>📌 专项强化推荐</h4>
+                    <div class="recommendation-tags" id="recommendationTags"></div>
+                    <ol class="recommendation-list" id="recommendationList"></ol>
+                    <div class="recommendation-empty" id="recommendationEmpty" style="display: none;">本次答题没有可推荐题目，继续保持！</div>
+                </div>
 
                 <div class="result-buttons">
                     <button class="result-btn again" onclick="backToCategorySelector()">再做一遍</button>
@@ -1571,6 +1729,74 @@
             retryQueue: []
         };
 
+        const sessionStoragePrefix = 'astro_quiz_user_v1';
+        let currentUserId = null;
+
+        const categoryLabelMap = {
+            stars: '⭐ 恒星知识',
+            constellations: '🌌 星座与黄道',
+            planets: '🪐 行星与天体',
+            units: '📏 天文单位与换算',
+            spacecraft: '🛸 航天器与探测'
+        };
+
+
+        function normalizeUserId(userId) {
+            return (userId || '').trim().toLowerCase();
+        }
+
+        function getUserStorageKey(userId) {
+            return `${sessionStoragePrefix}_${normalizeUserId(userId)}`;
+        }
+
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const digest = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function getUserStore(userId) {
+            const normalizedId = normalizeUserId(userId);
+            if (!normalizedId) return null;
+            try {
+                const raw = localStorage.getItem(getUserStorageKey(normalizedId));
+                if (!raw) {
+                    return {
+                        userId: normalizedId,
+                        passwordHash: '',
+                        lastSession: null,
+                        history: []
+                    };
+                }
+                const parsed = JSON.parse(raw);
+                if (!parsed || typeof parsed !== 'object') throw new Error('invalid');
+                return {
+                    userId: normalizedId,
+                    passwordHash: String(parsed.passwordHash || ''),
+                    lastSession: parsed.lastSession && typeof parsed.lastSession === 'object' ? parsed.lastSession : null,
+                    history: Array.isArray(parsed.history) ? parsed.history.slice(0, 20) : []
+                };
+            } catch (error) {
+                console.warn('读取用户存储失败：', error);
+                return null;
+            }
+        }
+
+        function saveUserStore(store) {
+            if (!store || !store.userId) return;
+            try {
+                localStorage.setItem(getUserStorageKey(store.userId), JSON.stringify({
+                    userId: normalizeUserId(store.userId),
+                    passwordHash: String(store.passwordHash || ''),
+                    lastSession: store.lastSession || null,
+                    history: Array.isArray(store.history) ? store.history.slice(0, 20) : []
+                }));
+            } catch (error) {
+                console.warn('保存用户存储失败：', error);
+            }
+        }
+
         // ==================== 初始化 ====================
         function initializeLibrary() {
             renderCategoryButtons();
@@ -1600,7 +1826,6 @@
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-
             if (activeButton) {
                 activeButton.classList.add('active');
             } else {
@@ -1847,7 +2072,15 @@
         }
 
         // ==================== 开始答题 ====================
+        function ensureLoggedInForQuiz() {
+            if (currentUserId) return true;
+            alert('请先在主页面注册或登录后再开始答题，这样才能保存你的个人历史记录。');
+            showMenu('mainMenu');
+            return false;
+        }
+
         function startQuiz(difficulty) {
+            if (!ensureLoggedInForQuiz()) return;
             const categoryQuestions = questionBank[quizState.currentCategory];
             const filteredQuestions = categoryQuestions.filter(q => q.difficulty === difficulty);
             
@@ -1866,17 +2099,11 @@
             quizState.correctCount = 0;
             quizState.wrongCount = 0;
             quizState.targetCount = quizState.questions.length;
-            
-            // 设置分类显示
-            const categoryNames = {
-                stars: '⭐ 恒星知识',
-                constellations: '🌌 星座与黄道',
-                planets: '🪐 行星与天体',
-                units: '📏 天文单位与换算',
-                spacecraft: '🛸 航天器与探测'
-            };
-            
-            document.getElementById('categoryDisplay').textContent = categoryNames[quizState.currentCategory];
+
+            adaptiveState.wrongByCategory = {};
+            adaptiveState.askedIds = new Set();
+            adaptiveState.retryQueue = [];
+            document.getElementById('categoryDisplay').textContent = categoryLabelMap[quizState.currentCategory];
             document.getElementById('totalQuestions').textContent = quizState.questions.length;
             
             showMenu('quizMenu');
@@ -1900,6 +2127,301 @@
             meta.innerHTML = `当前题库共 <strong>${allQuestions.length}</strong> 道题：
                 基础 ${byLevel('easy')} 道 / 进阶 ${byLevel('medium')} 道 / 高阶 ${byLevel('hard')} 道。
                 智能测评默认每次抽取 12 题。`;
+
+            renderLastSessionCard();
+            renderHistoryCard();
+        }
+
+        function getQuestionById(qid) {
+            const allQuestions = Object.values(questionBank).flat();
+            return allQuestions.find(q => q._qid === qid) || null;
+        }
+
+        function sanitizeWrongByCategory(raw) {
+            const safe = {};
+            if (!raw || typeof raw !== 'object') return safe;
+
+            Object.entries(raw).forEach(([category, count]) => {
+                if (!questionBank[category]) return;
+                const normalized = Number.isFinite(Number(count)) ? Math.max(0, Math.floor(Number(count))) : 0;
+                if (normalized > 0) {
+                    safe[category] = normalized;
+                }
+            });
+
+            return safe;
+        }
+
+        function saveLastSessionReport(report) {
+            if (!currentUserId) return;
+            const store = getUserStore(currentUserId);
+            if (!store) return;
+            store.lastSession = report;
+            store.history = [report, ...(store.history || [])].slice(0, 20);
+            saveUserStore(store);
+        }
+
+        function loadLastSessionReport() {
+            if (!currentUserId) return null;
+            const store = getUserStore(currentUserId);
+            return store ? store.lastSession : null;
+        }
+
+        function loadCurrentUserHistory() {
+            if (!currentUserId) return [];
+            const store = getUserStore(currentUserId);
+            if (!store || !Array.isArray(store.history)) return [];
+            return store.history;
+        }
+
+        function renderAuthStatus(message = '') {
+            const status = document.getElementById('authStatus');
+            if (!status) return;
+            if (!currentUserId) {
+                status.textContent = message || '当前未登录。登录后将按用户保存答题历史与推荐。';
+                return;
+            }
+            const historyCount = loadCurrentUserHistory().length;
+            status.textContent = `${message || '已登录'}：${currentUserId}（历史记录 ${historyCount} 次）`;
+        }
+
+        function renderHistoryCard() {
+            const card = document.getElementById('historyCard');
+            if (!card) return;
+            if (!currentUserId) {
+                card.style.display = 'none';
+                card.innerHTML = '';
+                return;
+            }
+
+            const history = loadCurrentUserHistory();
+            if (history.length === 0) {
+                card.style.display = 'block';
+                card.innerHTML = `<h4>📚 ${currentUserId} 的答题历史</h4><div class="history-empty">暂无历史记录，开始答题后会自动保存。</div>`;
+                return;
+            }
+
+            const items = history.slice(0, 8).map(item => {
+                const modeText = item.mode === 'adaptive' ? '智能测评' : '普通练习';
+                return `<li>${item.finishedAt || '-'} ｜ ${modeText} ｜ 正确率 ${item.correctRate || 0}%（${item.correctCount || 0}/${item.totalQuestions || 0}）</li>`;
+            }).join('');
+
+            card.style.display = 'block';
+            card.innerHTML = `
+                <h4>📚 ${currentUserId} 的答题历史（最近 ${Math.min(history.length, 8)} 次）</h4>
+                <ol class="history-list">${items}</ol>
+            `;
+        }
+
+        function renderLastSessionCard() {
+            const card = document.getElementById('lastSessionCard');
+            if (!card) return;
+
+            if (!currentUserId) {
+                card.style.display = 'block';
+                card.innerHTML = '<h4>🧾 上次答题记录</h4><div>请先登录账号后查看个人上次答题记录。</div>';
+                return;
+            }
+
+            const report = loadLastSessionReport();
+            if (!report) {
+                card.style.display = 'block';
+                card.innerHTML = '<h4>🧾 上次答题记录</h4><div>当前账号暂无记录，完成一次答题后会自动生成。</div>';
+                return;
+            }
+
+            const labels = Object.entries(report.wrongByCategory || {})
+                .sort((a, b) => b[1] - a[1])
+                .map(([category, count]) => `${categoryLabelMap[category] || category}（错 ${count}）`);
+
+            card.style.display = 'block';
+            card.innerHTML = `
+                <h4>🧾 上次答题记录（用户：${currentUserId}）</h4>
+                <div>模式：${report.mode === 'adaptive' ? '智能测评' : '普通分类练习'}，正确率：${report.correctRate || 0}%（${report.correctCount || 0}/${report.totalQuestions || 0}）</div>
+                <div>薄弱知识点：${labels.length > 0 ? labels.join('、') : '无明显薄弱项'}</div>
+                <div style="font-size:12px;color:#90caf9;">时间：${report.finishedAt || '-'}</div>
+            `;
+        }
+
+        async function registerUser() {
+            const rawUserId = document.getElementById('authUserId')?.value || '';
+            const userId = normalizeUserId(rawUserId);
+            const password = document.getElementById('authPassword')?.value || '';
+            if (!userId || !password) {
+                alert('请输入用户ID和密码');
+                return;
+            }
+            if (userId.length < 3) {
+                alert('用户ID至少 3 个字符');
+                return;
+            }
+            if (password.length < 6) {
+                alert('密码至少 6 位');
+                return;
+            }
+            const existed = getUserStore(userId);
+            if (existed && existed.passwordHash) {
+                alert('该用户ID已存在，请直接登录');
+                return;
+            }
+
+            const passwordHash = await hashPassword(password);
+            saveUserStore({ userId, passwordHash, lastSession: null, history: [] });
+            currentUserId = userId;
+            localStorage.setItem('astro_current_user_v1', currentUserId);
+            renderAuthStatus('注册并登录成功');
+            renderAdaptiveMeta();
+            alert(`注册成功，欢迎你 ${userId}`);
+        }
+
+        async function loginUser() {
+            const rawUserId = document.getElementById('authUserId')?.value || '';
+            const userId = normalizeUserId(rawUserId);
+            const password = document.getElementById('authPassword')?.value || '';
+            if (!userId || !password) {
+                alert('请输入用户ID和密码');
+                return;
+            }
+
+            const store = getUserStore(userId);
+            if (!store || !store.passwordHash) {
+                alert('用户不存在，请先注册');
+                return;
+            }
+
+            const passwordHash = await hashPassword(password);
+            if (store.passwordHash !== passwordHash) {
+                alert('密码错误，请重试');
+                return;
+            }
+
+            currentUserId = userId;
+            localStorage.setItem('astro_current_user_v1', currentUserId);
+            renderAuthStatus('登录成功');
+            renderAdaptiveMeta();
+        }
+
+        function logoutUser() {
+            if (!currentUserId) {
+                renderAuthStatus('当前未登录');
+                return;
+            }
+            currentUserId = null;
+            localStorage.removeItem('astro_current_user_v1');
+            renderAuthStatus('已退出登录');
+            renderAdaptiveMeta();
+        }
+
+        function createWeightedRecommendationList(wrongByCategory, totalCount = 12) {
+            const normalizedWrong = sanitizeWrongByCategory(wrongByCategory);
+            const entries = Object.entries(normalizedWrong).sort((a, b) => b[1] - a[1]);
+            if (entries.length === 0) return [];
+
+            const allQuestions = Object.values(questionBank).flat();
+            const plan = [];
+            const used = new Set();
+
+            const totalWrong = entries.reduce((sum, [, count]) => sum + count, 0);
+            const rawSlots = entries.map(([category, count]) => ({
+                category,
+                count,
+                slot: Math.max(1, Math.floor((count / totalWrong) * totalCount))
+            }));
+
+            let assigned = rawSlots.reduce((sum, item) => sum + item.slot, 0);
+            let index = 0;
+            while (assigned < totalCount && rawSlots.length > 0) {
+                rawSlots[index % rawSlots.length].slot += 1;
+                assigned += 1;
+                index += 1;
+            }
+
+            rawSlots.sort((a, b) => b.count - a.count);
+
+            rawSlots.forEach(item => {
+                const category = item.category;
+                let slotLeft = item.slot;
+                const bucket = allQuestions
+                    .filter(q => (q.category || 'stars') === category)
+                    .sort(() => Math.random() - 0.5);
+
+                for (const q of bucket) {
+                    if (plan.length >= totalCount) break;
+                    if (slotLeft <= 0) break;
+                    if (used.has(q._qid)) continue;
+                    plan.push(q);
+                    used.add(q._qid);
+                    slotLeft -= 1;
+                }
+            });
+
+            if (plan.length < totalCount) {
+                const backup = allQuestions
+                    .filter(q => !used.has(q._qid))
+                    .sort((a, b) => {
+                        const wa = normalizedWrong[a.category || 'stars'] || 0;
+                        const wb = normalizedWrong[b.category || 'stars'] || 0;
+                        return wb - wa;
+                    });
+
+                for (const q of backup) {
+                    if (plan.length >= totalCount) break;
+                    plan.push(q);
+                    used.add(q._qid);
+                }
+            }
+
+            return plan;
+        }
+
+        function renderRecommendationPanel(report) {
+            const panel = document.getElementById('recommendationPanel');
+            const tags = document.getElementById('recommendationTags');
+            const list = document.getElementById('recommendationList');
+            const empty = document.getElementById('recommendationEmpty');
+            if (!panel || !tags || !list || !empty) return;
+
+            tags.innerHTML = '';
+            list.innerHTML = '';
+            empty.style.display = 'none';
+
+            if (!report) {
+                panel.style.display = 'none';
+                return;
+            }
+
+            const wrongByCategory = sanitizeWrongByCategory(report.wrongByCategory);
+            const sorted = Object.entries(wrongByCategory).sort((a, b) => b[1] - a[1]);
+
+            if (sorted.length === 0) {
+                panel.style.display = 'block';
+                empty.style.display = 'block';
+                return;
+            }
+
+            sorted.forEach(([category, count]) => {
+                const tag = document.createElement('span');
+                tag.className = 'recommendation-tag';
+                tag.textContent = `${categoryLabelMap[category] || category} × ${count}`;
+                tags.appendChild(tag);
+            });
+
+            const recommendationList = createWeightedRecommendationList(wrongByCategory, 12);
+            if (recommendationList.length === 0) {
+                panel.style.display = 'block';
+                empty.style.display = 'block';
+                return;
+            }
+
+            recommendationList.forEach((q, idx) => {
+                const li = document.createElement('li');
+                const label = categoryLabelMap[q.category || 'stars'] || (q.category || 'stars');
+                li.textContent = `【${label}】${q.question}`;
+                li.title = `推荐序号 ${idx + 1}`;
+                list.appendChild(li);
+            });
+
+            panel.style.display = 'block';
         }
 
         function getAdaptivePool() {
@@ -1947,6 +2469,7 @@
         }
 
         function startAdaptiveQuiz() {
+            if (!ensureLoggedInForQuiz()) return;
             const totalQuestions = Object.values(questionBank).reduce((sum, arr) => sum + arr.length, 0);
             if (totalQuestions === 0) {
                 alert('请先在题库菜单导入题目后再开始智能测评');
@@ -2043,9 +2566,9 @@
                 quizState.correctCount++;
             } else {
                 quizState.wrongCount++;
+                const cat = question.category || quizState.currentCategory || "stars";
+                adaptiveState.wrongByCategory[cat] = (adaptiveState.wrongByCategory[cat] || 0) + 1;
                 if (quizState.mode === "adaptive") {
-                    const cat = question.category || "stars";
-                    adaptiveState.wrongByCategory[cat] = (adaptiveState.wrongByCategory[cat] || 0) + 1;
                     adaptiveState.retryQueue.push(question._qid);
                 }
             }
@@ -2088,7 +2611,6 @@
             
             // 显示下一题或完成按钮
             document.getElementById('submitBtn').style.display = 'none';
-            
             if (quizState.currentQuestionIndex < quizState.targetCount - 1) {
                 document.getElementById('nextBtn').style.display = 'block';
             } else {
@@ -2134,6 +2656,19 @@
                 resultTitle = '👍 不错！';
                 resultMessage = '你的成绩不错，继续保持并深化对知识的理解。';
             }
+
+            const sessionReport = {
+                mode: quizState.mode,
+                totalQuestions,
+                correctCount: quizState.correctCount,
+                wrongCount: quizState.wrongCount,
+                correctRate,
+                wrongByCategory: sanitizeWrongByCategory(adaptiveState.wrongByCategory),
+                finishedAt: new Date().toLocaleString('zh-CN')
+            };
+
+            saveLastSessionReport(sessionReport);
+            renderRecommendationPanel(sessionReport);
             
             document.getElementById('resultTitle').textContent = resultTitle;
             document.getElementById('resultTitle').className = `result-title ${resultLevel}`;
@@ -2175,6 +2710,8 @@
         // ==================== 页面加载 ====================
         window.addEventListener('load', () => {
             bindMainMenuActions();
+            currentUserId = normalizeUserId(localStorage.getItem('astro_current_user_v1') || '');
+            renderAuthStatus();
             showMenu('mainMenu');
         });
     </script>
